@@ -4,7 +4,7 @@ import React from 'react'
 function Form() {
     return (
         <FormContainer>
-            Page Content goes here......
+            Page Content goes here.......
         </FormContainer>
     )
 }

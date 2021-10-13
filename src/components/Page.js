@@ -17,13 +17,20 @@ function Page() {
 export default Page
 
 const PageContainer = styled.div`
+font-family: 'Roboto', sans-serif;
 background-color: lightgrey;
 height: 100vh;
 width: 100vw;
 display: grid;
-grid-template-rows: 3rem 1fr 2rem;
+grid-gap: 0.5em;
+grid-template-rows: 3rem 1fr;
 grid-template-areas: 
 'navbar'
-'content'
-'pagination'
+'content';
+
+@media (${({theme})=>theme.mediaquery.largeScreens}) {
+    grid-template-columns: 6rem 1fr;
+    grid-template-areas: 
+    'navbar content';
+}
 `;
