@@ -19,11 +19,11 @@ const [currentUser, setCurrentUser] = useState({});
 
 <>
 <NavBar/>
-<Form/>
+<Form />
 </>
         ): (
         <>
-        <Login/>
+        <Login appUsers={appUsers} setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser}/>
         </>
         
         )}
@@ -39,16 +39,21 @@ font-family: 'Roboto', sans-serif;
 background-color: rgb(229, 228, 226);
 height: 100vh;
 width: 100vw;
+font-size: 1vw;
 display: grid;
+
 grid-gap: 0.5em;
 grid-template-rows: 3rem 1fr;
 grid-template-areas: 
 'navbar'
 'content';
 
-@media (${({theme})=>theme.mediaquery.largeScreens}) {
+@media(${({theme})=>theme.mediaquery.largeScreens}) {
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 6rem 1fr;
     grid-template-areas: 
-    'navbar content';
+    'navbar content'
+    'navbar content'
+    ;
 }
 `;
