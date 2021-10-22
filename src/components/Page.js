@@ -36,6 +36,7 @@ export default Page
 
 const PageContainer = styled.div`
 font-family: 'Roboto', sans-serif;
+font-size: 1rem;
 background-color: rgb(229, 228, 226);
 height: 100vh;
 width: 100vw;
@@ -50,7 +51,7 @@ grid-template-areas:
 
 @media(${({theme})=>theme.mediaquery.largeScreens}) {
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 6rem 1fr;
+    grid-template-columns: 7rem 1fr;
     grid-template-areas: 
     'navbar content'
     'navbar content'
