@@ -105,14 +105,15 @@ const SubmitButton = styled.input`
 background-color: green;
 height: 3rem;
 width: 7rem;
-//font-size: 1.5rem;
+color: white;
 margin: auto;
 bottom: 2rem;
 cursor: pointer;
 border-radius: 0.5rem;
 `;
 
-const FormHeader = styled.h2`
+const FormHeader = styled.div`
+font-size: 1rem;
 width: 50%;
 align-items: center;
 color: red;
