@@ -6,7 +6,7 @@ export const theme = {
 
     mediaquery: {
 
-        smallScreens: 'max-width: 600px',
+        smallScreens: 'max-width: 576px',
         mediumScreens: '(min-width: 601px) and (max-width: 768px)',
        // mediumScreens_max: 'max-width: 768px',
         largeScreens1: 'min-width: 769px',
