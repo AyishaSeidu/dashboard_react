@@ -6,13 +6,14 @@ function NavBar() {
 const [expandContent, setExpandContent] = useState(false);
 const [selectedItem, setSelectedItem] = useState('');
 const [openMenuBar, setOpenMenuBar] = useState(false);
+
     return (
         <NavBarContainer>
             <SiteHeading > User Engagement Dashboard</SiteHeading>
           
 
-<NavContainer open={openMenuBar} >
-    <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>X</CloseMenu>
+<NavContainer animation={showNavAnimation} open={openMenuBar} >
+    <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu>
 
 <NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('analytics')}} > Analytics</NavItem>
 
@@ -72,11 +73,11 @@ cursor: pointer;
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
     position: fixed;
     right: 0;
-    top: 1rem;
+    //top: 1rem;
     justify-self: right;
     max-height: 100vh;
     min-height: 70vh;
-    top: 3rem;
+    //top: 3rem;
     overflow: auto;
     width: 50vw;
     background-color: inherit;
@@ -85,6 +86,7 @@ cursor: pointer;
     //toggling menu bar on small screens
     ${({open})=> open===true && css`
     display: block;
+    animation: ${showNavAnimation} ease-in 1s;
 `
 }
 }
@@ -162,16 +164,25 @@ const CloseMenu = styled.div`
 display: none;
 
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
+    background-color: whitesmoke;
     font-size: 1.5rem;
     position: fixed;
     display: inline-block;
-    //background-color: red;
-    top: 2.8rem;
+    //top: 2.8rem;
     right: 0rem;
     color: rgba(250,50,50,0.7);
 }
 `;
 
-const navAnimation = keyframes`
+//animation for nav item
+const showNavAnimation = keyframes`
+0% {
+    transform: translateX(20rem);
+}
+100% {
+    transform: translateX(1rem);
+
+};
 
 `;
+
