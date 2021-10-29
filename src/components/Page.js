@@ -51,7 +51,7 @@ grid-template-areas:
 
 @media(${({theme})=>theme.mediaquery.largeScreens}) {
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 7rem 1fr;
+    grid-template-columns: 11rem 1fr;
     grid-template-areas: 
     'navbar content'
     'navbar content'

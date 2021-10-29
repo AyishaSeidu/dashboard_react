@@ -154,10 +154,16 @@ height: 0.2rem;
 
 const SiteHeading = styled.div`
 grid-area: navhead;
+background-color: palevioletred;
+padding: 0.5rem 0;
 border: 0;
-font-size: 1rem;
+font-size: 0.8rem;
 align-self: center;
 justify-content: center;
+@media (${({theme})=>theme.mediaquery.smallScreens}) {
+font-size: 1rem;
+}
+
 `;
 
 const CloseMenu = styled.div`
