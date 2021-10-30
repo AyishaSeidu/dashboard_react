@@ -1,17 +1,21 @@
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from './Card';
+import {DataContext} from '../Page'
+
 
 function Analytics() {
+
+const data = useContext(DataContext) 
     return (
         <AnalyticsContainer>
             <CardsContainer>
-                <Card title={'Num. of Albums'} value = {10}/>
-                <Card title={'Num. of Comments'} value = {10}/>
-                <Card title={'Num. of Photos'} value = {10}/>
-                <Card title={'Num. of Posts'} value = {10}/>
-                <Card title={'Num. of Todos'} value = {10}/>
-                <Card title={'Num. of Users'} value = {10}/>
+                <Card title={'Albums'} value = {data?.analyticsData[0]?.data?.length}/>
+                <Card title={'Comments'} value = {data?.analyticsData[1]?.data?.length}/>
+                <Card title={'Photos'} value = {data?.analyticsData[2]?.data?.length}/>
+                <Card title={'Posts'} value = {data?.analyticsData[3]?.data?.length}/>
+                <Card title={'Todos'} value = {data?.analyticsData[4]?.data?.length}/>
+                <Card title={'Users'} value = {data?.analyticsData[5]?.data?.length}/>
                 
             </CardsContainer>
         </AnalyticsContainer>
