@@ -6,20 +6,28 @@ import NavBar from './NavBar';
 import Form from './UserForm/Form';
 import Login from './Login';
 
+const DataContext = React.createContext();
 function Page() {
 
 //login setup    
 const appUsers = [{username: 'admin', password: 'admin_test', permissionLevel: 'admin'}, {username:'Ayi', password: 'hisham', permissionLevel: 'user'}];
 const [loggedIn, setLoggedIn] = useState(false);
 const [currentUser, setCurrentUser] = useState({});
+const [query, setQuery] = useState('');
+
 
     return (
+        
         <PageContainer>
         {loggedIn ? (
 
 <>
+<DataContext.Provider value={{query, setQuery}}>
 <NavBar/>
-<Form />
+
+{loggedIn && query==='' && <Analytics />}
+{loggedIn && query!='' && <DataTable />}
+</DataContext.Provider>
 </>
         ): (
         <>
