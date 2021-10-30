@@ -5,6 +5,7 @@ import DataTable from './DataTables/DataTable';
 import NavBar from './NavBar';
 import Form from './UserForm/Form';
 import Login from './Login';
+import axios from 'axios';
 
 const DataContext = React.createContext();
 function Page() {
@@ -13,8 +14,34 @@ function Page() {
 const appUsers = [{username: 'admin', password: 'admin_test', permissionLevel: 'admin'}, {username:'Ayi', password: 'hisham', permissionLevel: 'user'}];
 const [loggedIn, setLoggedIn] = useState(false);
 const [currentUser, setCurrentUser] = useState({});
-const [query, setQuery] = useState('');
 
+//data fecting from API
+const [query, setQuery] = useState('');
+const [analyticsData, setAnalyticsData] = useState([{}])
+
+useEffect(() => {
+  
+    const fecthData = async (query) => {
+       if (query==='' && loggedIn) {
+           const albumRequest = await axios.get('https://jsonplaceholder.typicode.com/albums');
+           const commentRequest = await axios.get('https://jsonplaceholder.typicode.com/comments');
+           const photoRequest = await axios.get('https://jsonplaceholder.typicode.com/photos');
+           const postRequest = await axios.get('https://jsonplaceholder.typicode.com/posts');
+           const todoRequest = await axios.get('https://jsonplaceholder.typicode.com/todos')
+           const userRequest = await axios.get('https://jsonplaceholder.typicode.com/users')
+           try {
+            Promise.all([albumRequest, commentRequest, photoRequest, postRequest, todoRequest, userRequest])
+            .then(res=>{
+                console.log(res[1])
+                setAnalyticsData(res);
+            });
+           } catch (error) {
+             console.log(error)
+           }
+       }
+    }
+fecthData(query);
+}, [query])
 
     return (
         
