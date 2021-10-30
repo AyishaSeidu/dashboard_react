@@ -1,11 +1,14 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+import { DotLoader } from "react-spinners";
 import Analytics from "./Analytics/Analytics";
 import DataTable from "./DataTables/DataTable";
 import NavBar from "./NavBar";
 import Form from "./UserForm/Form";
 import Login from "./Login";
-import axios from "axios";
 
 export const DataContext = React.createContext();
 function Page() {
@@ -14,77 +17,95 @@ function Page() {
     { username: "admin", password: "admin_test", permissionLevel: "admin" },
     { username: "Ayi", password: "hisham", permissionLevel: "user" },
   ];
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
   //data fecting from API
   const [query, setQuery] = useState("");
   const [analyticsData, setAnalyticsData] = useState([{}]);
+  const [loading, setLoading] = useState(false);
+
+  //spinner's css
+
+  const spinnerCSS = css`
+    grid-area: content;
+    margin: auto;
+  `;
 
   useEffect(() => {
     const fecthData = async (query) => {
-      if (query === '' && loggedIn) {
-          alert('QUERY WORKS')
-        const albumRequest = await axios.get(
+        setLoading(true);
+      if (query === "" && loggedIn) {
+        const albumRequest = async () => await axios.get(
           "https://jsonplaceholder.typicode.com/albums"
         );
-        const commentRequest = await axios.get(
+        const commentRequest = async () => await axios.get(
           "https://jsonplaceholder.typicode.com/comments"
         );
-        const photoRequest = await axios.get(
+        const photoRequest = async () => await axios.get(
           "https://jsonplaceholder.typicode.com/photos"
-        );
-        const postRequest = await axios.get(
+        );  
+        const postRequest = async () => await axios.get(
           "https://jsonplaceholder.typicode.com/posts"
         );
-        const todoRequest = await axios.get(
+        const todoRequest = async () => await axios.get(
           "https://jsonplaceholder.typicode.com/todos"
         );
-        const userRequest = await axios.get(
+        const userRequest = async () => await axios.get(
           "https://jsonplaceholder.typicode.com/users"
         );
+            console.log(commentRequest.data)
+        //fetch analytics data
         try {
           Promise.all([
-            albumRequest,
-            commentRequest,
-            photoRequest,
-            postRequest,
-            todoRequest,
-            userRequest,
+            albumRequest(),
+            commentRequest(),
+            photoRequest(),
+            postRequest(),
+            todoRequest(),
+            userRequest(),
           ]).then((res) => {
+              console.log('we are in the then block')
             console.log(res[1]);
             setAnalyticsData(res);
+            setLoading(false);
           });
         } catch (error) {
           console.log(error);
+          setLoading(false);
         }
       }
     };
     fecthData(query);
-  }, [query]);
+  }, [query,loggedIn]);
 
-  return (
-    <PageContainer>
-      {loggedIn ? (
-        <>
-          <DataContext.Provider value={{ query, setQuery, analyticsData }}>
-            <NavBar />
-
-            {loggedIn && query === "" && <Analytics />}
-            {loggedIn && query != "" && <DataTable />}
-          </DataContext.Provider>
-        </>
-      ) : (
-        <>
-          <Login
-            appUsers={appUsers}
-            setLoggedIn={setLoggedIn}
-            setCurrentUser={setCurrentUser}
-          />
-        </>
-      )}
-    </PageContainer>
-  );
+  if (loggedIn === false) {
+    return (
+      <PageContainer>
+        <Login
+          appUsers={appUsers}
+          setLoggedIn={setLoggedIn}
+          setCurrentUser={setCurrentUser}
+        />
+      </PageContainer>
+    );
+  } else {
+    return (
+      <PageContainer>
+        <DataContext.Provider value={{ query, setQuery, analyticsData }}>
+          <NavBar />
+          {loading && loggedIn ? (
+            <DotLoader css={spinnerCSS} />
+          ) : (
+            <>
+              {loggedIn && query === "" && <Analytics />}
+              {loggedIn && query != "" && <DataTable />}
+            </>
+          )}
+        </DataContext.Provider>
+      </PageContainer>
+    );
+  }
 }
 
 export default Page;
