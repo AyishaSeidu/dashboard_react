@@ -6,7 +6,21 @@ import {DataContext} from '../Page'
 
 function Analytics() {
 
-const data = useContext(DataContext) 
+
+const data = useContext(DataContext);
+//get todo data for charts
+
+const todos = data?.analyticsData[4]?.data;
+
+const completed = todos.filter((todo)=> {
+    return todo.completed===true
+}).length;
+
+const pending = todos.filter((todo)=> {
+    return todo.completed===false
+}).length;
+console.log(pending)
+
     return (
         <AnalyticsContainer>
             <CardsContainer>
