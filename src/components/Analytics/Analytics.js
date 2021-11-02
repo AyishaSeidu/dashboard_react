@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import React, { useContext } from 'react'
 import Card from './Card';
 import {DataContext} from '../Page'
+import DoughnutChart from '../Analytics/DougnutChart';
 
 
 function Analytics() {
@@ -32,7 +33,9 @@ console.log(pending)
                 <Card area = {'users'} title={'Users'} value = {data?.analyticsData[5]?.data?.length}/>
                 
             </CardsContainer>
-            <ChartsContainer></ChartsContainer>
+            <ChartsContainer>
+                <DoughnutChart chartData={[completed, pending]} dataDescription={['Completed', 'Pending']} chartTitle='Todos Details' gridarea='doughnut' />
+            </ChartsContainer>
         </AnalyticsContainer>
     )
 }
