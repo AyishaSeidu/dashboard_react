@@ -32,6 +32,7 @@ console.log(pending)
                 <Card area = {'users'} title={'Users'} value = {data?.analyticsData[5]?.data?.length}/>
                 
             </CardsContainer>
+            <ChartsContainer></ChartsContainer>
         </AnalyticsContainer>
     )
 }
@@ -66,6 +67,21 @@ grid-template-rows: repeat(2, 1fr);
 grid-template-areas: 
 'albums comments photos'
 'posts todos users'; 
+}
+`;
+
+const ChartsContainer = styled.div`
+grid-area: charts;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-areas: 'doughnut albumChart postChart';
+@media (${({theme})=>theme.mediaquery.smallScreens}) {
+grid-template-columns: 1fr;
+grid-template-rows: repeat(3, 1fr);
+grid-template-areas: 
+'doughnut' 
+'albumChart'
+'postChart'; 
 }
 `;
 
