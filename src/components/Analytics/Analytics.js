@@ -12,6 +12,9 @@ const data = useContext(DataContext);
 //get todo data for charts
 
 const todos = data?.analyticsData[4]?.data;
+const albums = data?.analyticsData[0]?.data;
+const posts = data?.analyticsData[3]?.data;
+const users = data?.analyticsData[5]?.data
 
 const completed = todos.filter((todo)=> {
     return todo.completed===true
@@ -20,7 +23,25 @@ const completed = todos.filter((todo)=> {
 const pending = todos.filter((todo)=> {
     return todo.completed===false
 }).length;
-console.log(pending)
+
+//getting bar chart data. this funcion return the number of inputs per user give a user array and the data under study
+const getBarChartData = (users=[], chartData=[]) => {
+    const dataPerUser = [];
+
+    users.forEach((user)=> {
+     let userData = chartData.filter((data)=> {
+            return user.id===data?.userId;
+        }).length;
+
+   dataPerUser.push(userData);
+    })
+
+    return dataPerUser;
+}
+
+const postsPerUser = getBarChartData(users,posts);
+const albumsPerUser = getBarChartData(users,albums);
+
 
     return (
         <AnalyticsContainer>

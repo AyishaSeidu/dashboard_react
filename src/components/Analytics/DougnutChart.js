@@ -9,18 +9,20 @@ function DougnutChart({chartData, dataDescription, chartTitle, gridarea}) {
             {
                 label: chartTitle,
                 data: chartData,
-                backgroundColor: [`${({ theme }) => theme.colors.primary}`, 'green']
+                backgroundColor: [`${({ theme }) => theme.colors.primary}`, '#00c7b6']
             }
         ]
     }
 
     const ChartArea = styled.div`
     grid-area: ${gridarea};
+    margin: auto;
+    background-color: white;
     `;
 
     return (
         <ChartArea>
-            <Doughnut data={data} options={{maintainAspectRatio: false}} />
+            <Doughnut data={data} options={{maintainAspectRatio: true}} />
         </ChartArea>
     )
 }

@@ -28,6 +28,7 @@ display: inline-block;
 padding: 0.5rem;
 margin: 0.3rem;
 font-size: 1rem;
+border-radius: 1rem;
 align-items: center;
 height: 50%;
 animation: ${CardAnimation} ease-in 2s;
