@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 
-function DougnutChart({chartData, dataDescription, chartTitle, gridarea}) {
+function DoughnutChart({chartData, dataDescription, chartTitle, gridarea}) {
     const data = {
         labels: dataDescription,
         datasets: [
@@ -27,4 +27,4 @@ function DougnutChart({chartData, dataDescription, chartTitle, gridarea}) {
     )
 }
 
-export default DougnutChart
+export default DoughnutChart

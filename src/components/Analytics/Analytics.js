@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React, { useContext } from 'react'
 import Card from './Card';
 import {DataContext} from '../Page'
-import DoughnutChart from '../Analytics/DougnutChart';
+import DoughnutChart from './DoughnutChart';
 
 
 function Analytics() {
