@@ -18,6 +18,7 @@ function BarChart({chartData, dataDescription, chartTitle, gridarea}) {
     const ChartArea = styled.div`
     grid-area: ${gridarea};
     margin: auto;
+    height: 70%;
     background-color: white;
     `;
 

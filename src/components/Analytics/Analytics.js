@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import Card from './Card';
 import {DataContext} from '../Page'
 import DoughnutChart from './DoughnutChart';
+import BarChart from './BarChart';
 
 
 function Analytics() {
@@ -61,6 +62,8 @@ console.log(usernames);
             </CardsContainer>
             <ChartsContainer>
                 <DoughnutChart chartData={[completed, pending]} dataDescription={['Completed', 'Pending']} chartTitle='Todos Details' gridarea='doughnut' />
+                <BarChart chartData={albumsPerUser} dataDescription={usernames} chartTitle='Albums per User' gridarea='albumChart'/>
+                <BarChart chartData={postsPerUser} dataDescription={usernames} chartTitle='Posts per User' gridarea='postChart'/>
             </ChartsContainer>
         </AnalyticsContainer>
     )
