@@ -39,9 +39,14 @@ const getBarChartData = (users=[], chartData=[]) => {
     return dataPerUser;
 }
 
+const usernames = users.map((user)=> {
+       return user.username;
+    })
+
+
 const postsPerUser = getBarChartData(users,posts);
 const albumsPerUser = getBarChartData(users,albums);
-
+console.log(usernames);
 
     return (
         <AnalyticsContainer>
