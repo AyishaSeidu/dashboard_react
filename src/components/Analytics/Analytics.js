@@ -105,7 +105,13 @@ grid-template-areas:
 const ChartsContainer = styled.div`
 grid-area: charts;
 display: grid;
-grid-template-columns: repeat(3, 1fr);
+height: 100%;
+width: 100%;
+margin: 0.5rem auto;
+background-color: white;
+grid-gap: 1rem;
+grid-template-columns: 1fr;
+grid-template-columns: repeat(3, 20rem);
 grid-template-areas: 'doughnut albumChart postChart';
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
 grid-template-columns: 1fr;

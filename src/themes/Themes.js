@@ -6,11 +6,11 @@ export const theme = {
 
     mediaquery: {
 
-        smallScreens: 'max-width: 576px',
+        smallScreens: 'max-width: 770px',
         mediumScreens: '(min-width: 601px) and (max-width: 768px)',
        // mediumScreens_max: 'max-width: 768px',
         largeScreens1: 'min-width: 769px',
-        largeScreens: 'min-width: 576px'
+        largeScreens: 'min-width: 770px'
 
     }
 
