@@ -31,7 +31,7 @@ font-size: 1rem;
 border-radius: 1rem;
 align-items: center;
 height: 50%;
-animation: ${CardAnimation} ease-in 2s;
+animation: ${CardAnimation} ease-in 1s;
 background-color: ${({theme})=>theme.colors.primary};
 color: ${({theme})=>theme.colors.secondary};
 //border: 0.05rem solid ${({theme})=>theme.colors.secondary};;

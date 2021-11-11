@@ -98,6 +98,7 @@ function Page() {
             <DotLoader css={spinnerCSS} />
           ) : (
             <>
+            <Head>Analytics</Head>
               {loggedIn && query === "" && <Analytics />}
               {loggedIn && query != "" && <DataTable />}
             </>
@@ -120,16 +121,24 @@ const PageContainer = styled.div`
   display: grid;
 
   grid-gap: 0.5em;
-  grid-template-rows: 3rem 1fr;
+  grid-template-rows: 3rem 3rem 1fr;
   grid-template-areas:
     "navbar"
+    "pageHead"
     "content";
 
   @media (${({ theme }) => theme.mediaquery.largeScreens}) {
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 5rem 1fr 1fr;
     grid-template-columns: 11rem 1fr;
     grid-template-areas:
+      "navbar pageHead"
       "navbar content"
       "navbar content";
   }
+`;
+const Head = styled.div`
+grid-area: 'pageHead';
+align-self: center;
+font-size: 2rem;
+font-weight: bold;
 `;

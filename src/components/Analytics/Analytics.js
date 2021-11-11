@@ -80,7 +80,7 @@ height: 100%;
 overflow: auto;
 display: grid; 
 grid-template-columns: 1fr;
-grid-template-rows: 10rem 1fr;
+grid-template-rows:10rem 1fr;
 grid-template-areas: 
 'cards'
 'charts'
@@ -91,6 +91,7 @@ grid-template-areas:
 const CardsContainer = styled.div`
 grid-area: cards;
 display: grid;
+overflow: auto;
 grid-template-columns: repeat(6, 1fr);
 grid-template-areas: 'albums comments photos posts todos users';
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
@@ -110,8 +111,7 @@ width: 100%;
 margin: 0.5rem auto;
 background-color: white;
 grid-gap: 1rem;
-grid-template-columns: 1fr;
-grid-template-columns: repeat(3, 20rem);
+grid-template-columns: repeat(3, 1fr);
 grid-template-areas: 'doughnut albumChart postChart';
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
 grid-template-columns: 1fr;
@@ -123,3 +123,9 @@ grid-template-areas:
 }
 `;
 
+const Head = styled.div`
+grid-area: 'analyticsHead';
+align-self: center;
+font-size: 2rem;
+font-weight: bold;
+`;
