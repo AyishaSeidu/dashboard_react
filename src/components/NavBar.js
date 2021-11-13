@@ -1,12 +1,13 @@
 import styled from '@emotion/styled'
 import {css, keyframes} from '@emotion/react'
-import React, {useState} from 'react';
-function NavBar() {
+import React, {useContext, useState} from 'react';
+import { DataContext } from './Page';
 
+function NavBar() {
+let {query, setQuery} = useContext(DataContext)
 const [expandContent, setExpandContent] = useState(false);
 const [selectedItem, setSelectedItem] = useState('');
 const [openMenuBar, setOpenMenuBar] = useState(false);
-
     return (
         <NavBarContainer>
             <SiteHeading > User Engagement Dashboard</SiteHeading>
@@ -21,17 +22,17 @@ const [openMenuBar, setOpenMenuBar] = useState(false);
             {expandContent===true && (
             <>
                 
-                <NavItem id ={'albums'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('albums')}} >  Albums</NavItem>
+                <NavItem id ={'albums'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('albums'); setQuery('albums')}} >  Albums</NavItem>
 
-                <NavItem id ={'comments'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('comments')}}> Comments</NavItem>
+                <NavItem id ={'comments'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('comments'); setQuery('comments')}}> Comments</NavItem>
 
-                <NavItem id ={'photos'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('photos')}} > Photos</NavItem>
+                <NavItem id ={'photos'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('photos');setQuery('photos')}} > Photos</NavItem>
 
-                <NavItem id ={'posts'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('posts')}}> Posts</NavItem>
+                <NavItem id ={'posts'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('posts'); setQuery('posts')}}> Posts</NavItem>
                 
-                <NavItem id ={'todos'} selected={selectedItem}  onClick={(e)=>{e.preventDefault(); setSelectedItem('todos')}}> Todos</NavItem>
+                <NavItem id ={'todos'} selected={selectedItem}  onClick={(e)=>{e.preventDefault(); setSelectedItem('todos'); setQuery('todos')}}> Todos</NavItem>
 
-                <NavItem id ={'users'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('users')}}> Users</NavItem>
+                <NavItem id ={'users'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('users'); setQuery('users')}}> Users</NavItem>
             
             </>
             

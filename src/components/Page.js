@@ -23,6 +23,7 @@ function Page() {
   //data fecting from API
   const [query, setQuery] = useState("");
   const [analyticsData, setAnalyticsData] = useState([{}]);
+  const [tableData, setTableData] = useState([{}])
   const [loading, setLoading] = useState(false);
 
   //spinner's css
@@ -65,8 +66,6 @@ function Page() {
             todoRequest(),
             userRequest(),
           ]).then((res) => {
-              console.log('we are in the then block')
-            console.log(res[1]);
             setAnalyticsData(res);
             setLoading(false);
           });
@@ -74,6 +73,23 @@ function Page() {
           console.log(error);
           setLoading(false);
         }
+      }
+
+      else if (query!="" && loggedIn) {
+      setLoading(true)
+        try {
+          await axios.get(`https://jsonplaceholder.typicode.com/${query}`)
+          .then((res)=>{
+            setTableData(res.data);
+            console.log(tableData)
+            setLoading(false)
+          })
+        }
+        catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
+
       }
     };
     fecthData(query);
@@ -92,7 +108,7 @@ function Page() {
   } else {
     return (
       <PageContainer>
-        <DataContext.Provider value={{ query, setQuery, analyticsData }}>
+        <DataContext.Provider value={{ query, setQuery, analyticsData, tableData }}>
           <NavBar />
           {loading && loggedIn ? (
             <DotLoader css={spinnerCSS} />
