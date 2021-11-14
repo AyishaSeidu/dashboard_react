@@ -4,7 +4,7 @@ import React, {useContext, useState} from 'react';
 import { DataContext } from './Page';
 
 function NavBar() {
-let {query, setQuery} = useContext(DataContext)
+let {setQuery} = useContext(DataContext)
 const [expandContent, setExpandContent] = useState(false);
 const [selectedItem, setSelectedItem] = useState('');
 const [openMenuBar, setOpenMenuBar] = useState(false);
@@ -16,7 +16,7 @@ const [openMenuBar, setOpenMenuBar] = useState(false);
 <NavContainer animation={showNavAnimation} open={openMenuBar} >
     <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu>
 
-<NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('analytics')}} > Analytics</NavItem>
+<NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('analytics'); setQuery("analytics")}} > Analytics</NavItem>
 
             <ContentToggle expand = {expandContent} onClick={(e)=>{e.preventDefault(); setExpandContent(!expandContent)}} >Content</ContentToggle> 
             {expandContent===true && (

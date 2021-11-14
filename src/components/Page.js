@@ -21,7 +21,7 @@ function Page() {
   const [currentUser, setCurrentUser] = useState({});
 
   //data fecting from API
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("analytics");
   const [analyticsData, setAnalyticsData] = useState([{}]);
   const [tableData, setTableData] = useState([{}])
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ function Page() {
   useEffect(() => {
     const fecthData = async (query) => {
         setLoading(true);
-      if (query === "" && loggedIn) {
+      if (query === "analytics" && loggedIn) {
         const albumRequest = async () => await axios.get(
           "https://jsonplaceholder.typicode.com/albums"
         );
@@ -75,7 +75,7 @@ function Page() {
         }
       }
 
-      else if (query!="" && loggedIn) {
+      else if (query!="analytics" && loggedIn) {
       setLoading(true)
         try {
           await axios.get(`https://jsonplaceholder.typicode.com/${query}`)
@@ -114,9 +114,9 @@ function Page() {
             <DotLoader css={spinnerCSS} />
           ) : (
             <>
-            <Head>Analytics</Head>
-              {loggedIn && query === "" && <Analytics />}
-              {loggedIn && query != "" && <DataTable />}
+            <Head>{query}</Head>
+              {loggedIn && query === "analytics" && <Analytics />}
+              {loggedIn && query != "analytics" && <DataTable/>}
             </>
           )}
         </DataContext.Provider>
@@ -157,4 +157,5 @@ grid-area: 'pageHead';
 align-self: center;
 font-size: 2rem;
 font-weight: bold;
+text-transform: capitalize;
 `;

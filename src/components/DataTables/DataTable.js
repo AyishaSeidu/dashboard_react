@@ -1,10 +1,38 @@
 import styled from '@emotion/styled';
-import React from 'react'
+import React, { useContext } from 'react'
+import { DataContext } from '../Page';
+import TextTable from './TextTable';
 
 function DataTable() {
+const {tableData, query} = useContext(DataContext)
+let headers = [];
+
+if (query==='albums') {
+    headers = ["title"];
+}
+
+else if (query==='comments') {
+    headers = ['body'];
+}
+else if (query==='photos') {
+    headers=['title'];
+}
+else if (query==='posts') {
+    headers =['title', 'body'];
+}
+else if (query ==='todos') {
+    headers = ['title'];
+}
+else if (query==='users') {
+    headers=['name', 'username', 'email', 'phone', 'website']
+}
+else {
+    headers=[];
+}
+
     return (
         <TableContainer>
-            Table goes here.....
+            {(query==='albums' || query==='comments' || query==='posts' || query==='users') && <TextTable data={tableData} header={headers} />}
         </TableContainer>
     )
 }
@@ -13,6 +41,7 @@ export default DataTable
 const TableContainer = styled.div`
 background-color: white;
 margin: auto;
+overflow: auto;
 grid-area: content;
 width: 100%;
 height: 100%;
