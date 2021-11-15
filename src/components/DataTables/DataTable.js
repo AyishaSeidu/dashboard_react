@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React, { useContext } from 'react'
 import { DataContext } from '../Page';
+import Photos from './Photos';
 import TextTable from './TextTable';
 
 function DataTable() {
@@ -13,9 +14,6 @@ if (query==='albums') {
 
 else if (query==='comments') {
     headers = ['body'];
-}
-else if (query==='photos') {
-    headers=['title'];
 }
 else if (query==='posts') {
     headers =['title', 'body'];
@@ -33,6 +31,7 @@ else {
     return (
         <TableContainer>
             {(query==='albums' || query==='comments' || query==='posts' || query==='users') && <TextTable data={tableData} header={headers} />}
+            {query==='photos' && <Photos data={tableData} urlhead='thumbnailUrl'/>}
         </TableContainer>
     )
 }

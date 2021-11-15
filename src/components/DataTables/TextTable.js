@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import React from 'react'
+import { TableContainer } from '../Styles'
 
 function TextTable({data, header}) {
 
     return (
-        <Container>
+        <TableContainer>
         <Table>
         <TableHead><tr>
             {header.map((head)=>{
@@ -21,24 +22,14 @@ function TextTable({data, header}) {
                 })}
             </tbody>
         </Table>
-        </Container>
+        </TableContainer>
     )
     
 }
 
 export default TextTable;
 
-const Container = styled.div`
-height: 90%;
-width: 80%;
-background-color: white;
-margin: auto;
-grid-area: table;
-overflow: auto;
-font-size: 0.7rem;
-border-width: 0 0 0.2rem 0;
-border-color: #00c7b6;
-`;
+
 
 
 const Table = styled.table`
