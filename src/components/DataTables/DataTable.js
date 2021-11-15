@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { DataContext } from '../Page';
 import Photos from './Photos';
 import TextTable from './TextTable';
+import Todos from './Todos';
 
 function DataTable() {
 const {tableData, query} = useContext(DataContext)
@@ -32,6 +33,7 @@ else {
         <TableContainer>
             {(query==='albums' || query==='comments' || query==='posts' || query==='users') && <TextTable data={tableData} header={headers} />}
             {query==='photos' && <Photos data={tableData} urlhead='thumbnailUrl'/>}
+            {query==='todos' && <Todos data={tableData} taskhead={'title'} statushead={"completed"}/>}
         </TableContainer>
     )
 }
