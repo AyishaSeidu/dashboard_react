@@ -137,14 +137,14 @@ const PageContainer = styled.div`
   display: grid;
 
   grid-gap: 0.5em;
-  grid-template-rows: 3rem 3rem 1fr;
+  grid-template-rows: 3rem 2rem 1fr;
   grid-template-areas:
     "navbar"
     "pageHead"
     "content";
 
   @media (${({ theme }) => theme.mediaquery.largeScreens}) {
-    grid-template-rows: 5rem 1fr 1fr;
+    grid-template-rows: 2rem 1fr 1fr;
     grid-template-columns: 11rem 1fr;
     grid-template-areas:
       "navbar pageHead"
@@ -155,7 +155,7 @@ const PageContainer = styled.div`
 const Head = styled.div`
 grid-area: 'pageHead';
 align-self: center;
-font-size: 2rem;
+font-size: 3vh;
 font-weight: bold;
 text-transform: capitalize;
 `;

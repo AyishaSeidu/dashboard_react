@@ -39,10 +39,14 @@ else {
 
 export default DataTable
 const TableContainer = styled.div`
-background-color: white;
 margin: auto;
 overflow: auto;
 grid-area: content;
 width: 100%;
 height: 100%;
+display: grid;
+grid-template-rows: 1fr 1.5rem;
+grid-template-areas:
+'table'
+'pagination';
 `;

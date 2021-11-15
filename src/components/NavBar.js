@@ -155,7 +155,7 @@ height: 0.2rem;
 
 const SiteHeading = styled.div`
 grid-area: navhead;
-background-color: #ffad42;
+background-color: #00c7b6;
 padding: 0.5rem 0;
 border: 0;
 font-size: 0.8rem;
