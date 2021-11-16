@@ -122,10 +122,3 @@ grid-template-areas:
 'postChart'; 
 }
 `;
-
-const Head = styled.div`
-grid-area: 'analyticsHead';
-align-self: center;
-font-size: 2rem;
-font-weight: bold;
-`;

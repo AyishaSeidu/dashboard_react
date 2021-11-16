@@ -75,13 +75,12 @@ function Page() {
         }
       }
 
-      else if (query!="analytics" && loggedIn) {
+      else if (query!=="analytics" && loggedIn) {
       setLoading(true)
         try {
           await axios.get(`https://jsonplaceholder.typicode.com/${query}`)
           .then((res)=>{
             setTableData(res.data);
-            console.log(tableData)
             setLoading(false)
           })
         }
@@ -116,7 +115,7 @@ function Page() {
             <>
             <Head>{query}</Head>
               {loggedIn && query === "analytics" && <Analytics />}
-              {loggedIn && query != "analytics" && <DataTable/>}
+              {loggedIn && query !== "analytics" && <DataTable/>}
             </>
           )}
         </DataContext.Provider>
