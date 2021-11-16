@@ -1,3 +1,4 @@
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { TableContainer } from '../Styles'
@@ -12,15 +13,15 @@ function TextTable({data, header}) {
                 return <th key={head}> {head} </th>
             })}
             </tr></TableHead>
-            <tbody>
+            <TableBody>
                 {data.map((item)=> {
                     return <TableRow key={item?.id} >
                         {header.map((head)=>{
-                            return <td> <TableData>{item[head]}</TableData> </td>
+                            return  <TableData>{item[head]}</TableData>
                         })}
                     </TableRow>
                 })}
-            </tbody>
+            </TableBody>
         </Table>
         </TableContainer>
     )
@@ -60,10 +61,30 @@ border-bottom: 0.1rem solid #dddddd ;
 }
 `;
 
-const TableData = styled.div`
+const TableData = styled.td`
 color: gray;
 padding: 0.5rem;
 max-height: 0.5rem;
 white-space: nowrap;
 `;
+
+const TableAnimation = keyframes`
+0%{
+    opacity: 0;
+}
+
+50% {
+    opacity: 0.5;
+}
+
+100% {
+    opacity: 1;
+}
+`;
+const TableBody = styled.tbody`
+animation: ${TableAnimation} 2s ease-out;
+animation-fill-mode: forwards;
+
+`;
+
 

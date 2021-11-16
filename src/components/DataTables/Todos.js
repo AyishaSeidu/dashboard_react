@@ -5,6 +5,9 @@ import { TableContainer } from '../Styles'
 
 function Todos({data, taskhead, statushead}) {
 
+
+    data.sort((a,b)=>a[statushead]-b[statushead]);
+
     return (
         <TableContainer>
             {data.map((item)=>{
@@ -23,9 +26,9 @@ text-align: left;
 padding: 0.5rem;
 border-bottom: 0.1rem solid lightgray;
 font-size: 0.8rem;
-
+color: gray;
 ${({completed})=>completed===true && css`
-color: lightgray;
+//color: lightgray;
 text-decoration: line-through;
 `
 }
