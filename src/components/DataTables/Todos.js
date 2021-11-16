@@ -28,7 +28,6 @@ border-bottom: 0.1rem solid lightgray;
 font-size: 0.8rem;
 color: gray;
 ${({completed})=>completed===true && css`
-//color: lightgray;
 text-decoration: line-through;
 `
 }
