@@ -23,7 +23,7 @@ if (query==='albums') {
 }
 
 else if (query==='comments') {
-    headers = ['id','body'];
+    headers = ['body'];
 }
 else if (query==='posts') {
     headers =['title', 'body'];
@@ -43,7 +43,7 @@ else {
             {(query==='albums' || query==='comments' || query==='posts' || query==='users') && <TextTable data={currentData} header={headers} />}
             {query==='photos' && <Photos data={currentData} urlhead='thumbnailUrl'/>}
             {query==='todos' && <Todos data={currentData} taskhead={'title'} statushead={"completed"}/>}
-            <Pagination setCurrentPage={setCurrentPage} numOfPages={numOfPages} />
+            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} numOfPages={numOfPages} />
         </TableContainer>
     )
 }
