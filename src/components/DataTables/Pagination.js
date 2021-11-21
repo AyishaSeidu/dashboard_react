@@ -36,17 +36,34 @@ function Pagination({currentPage, setCurrentPage, numOfPages}) {
 
 
     }
+//toggling first and last pages
+const toggleEnds = (e, end) => {
+    e.preventDefault();
+    if (end==='first') {
+        setCurrentPage(1);
+        setFirst(1);
+        setLast(5);
+    }
 
-    console.log(pageNumbers)
+    else if (end==='last')  {
+        setCurrentPage(pageNumbers.length);
+        setLast(pageNumbers.length);
+        setFirst(pageNumbers.length-4);
+
+    }
+}
+
     return (
         <>
         {numOfPages>1 &&
                 <Container>
-                    <PaginationNav type="prev" onClick={(e)=>{ handleNavClick(e,'prev')}} />
+                    <Toggle onClick={(e)=> toggleEnds(e, 'first') } >First</Toggle>
+                    <PaginationNav type="prev" currentPage={currentPage} lastPage={pageNumbers.length} onClick={(e)=>{ handleNavClick(e,'prev')}} />
                 {Nums.map((num)=>{
                     return<Number key={num} active={currentPage} thisNum={num} onClick={(e)=>{e.preventDefault(); setCurrentPage(num)}}>{num}</Number>
                 })} 
                 <PaginationNav type="next" onClick={(e)=>{ handleNavClick(e,'next')}}/>
+                <Toggle onClick={(e)=> toggleEnds(e, 'last')}>Last</Toggle>
              </Container>
         }
 
@@ -59,6 +76,7 @@ export default Pagination
 const Container = styled.span`
 grid-area: pagination;
 //background-color: white;
+font-size: .7rem;
 display: inline;
 width: auto;
 height: 50%;
@@ -72,7 +90,6 @@ margin: .8rem;
 cursor: pointer; 
 height: 100%;
 width: 10px;
-font-size: .7rem;
 ${({active,thisNum})=> active===thisNum && css`::after
     border-radius: 50%;
     color: white;
@@ -97,5 +114,10 @@ ${({type})=> type==='next' && css`
 `}
 padding: .5rem;
 cursor: pointer;
-font-size: .7rem;
+`;
+
+const Toggle = styled.span`
+cursor: pointer;
+border: .01rem solid black;
+padding: .1rem;
 `;
