@@ -62,7 +62,7 @@ const toggleEnds = (e, end) => {
                 {Nums.map((num)=>{
                     return<Number key={num} active={currentPage} thisNum={num} onClick={(e)=>{e.preventDefault(); setCurrentPage(num)}}>{num}</Number>
                 })} 
-                <PaginationNav type="next" onClick={(e)=>{ handleNavClick(e,'next')}}/>
+                <PaginationNav type="next" currentPage={currentPage} lastPage={pageNumbers.length}  onClick={(e)=>{ handleNavClick(e,'next')}}/>
                 <Toggle onClick={(e)=> toggleEnds(e, 'last')}>Last</Toggle>
              </Container>
         }
@@ -86,7 +86,7 @@ justify-self: center;
 
 const Number = styled.span`
 padding: .2rem;
-margin: .8rem;
+margin: .5rem;
 cursor: pointer; 
 height: 100%;
 width: 10px;
@@ -97,6 +97,9 @@ ${({active,thisNum})=> active===thisNum && css`::after
     border: 0.1rem solid #00c7b6;
     border-radius: 20%;
 `}
+:hover {
+border: 0.05rem solid #00c7b6;
+}
 `;
 
 const PaginationNav=styled.span`
@@ -106,12 +109,19 @@ ${({type})=> type==='prev' && css`
     content: ' \\276E';
 }
 `}
+${({currentPage, type})=>type ==='prev' && currentPage===1 && css`
+display: none;
+`}
 //next button
 ${({type})=> type==='next' && css`
 ::after {
     content: ' \\276F';
-}
+}`}
+
+${({currentPage, lastPage, type})=>type ==='next' && currentPage===lastPage && css`
+display: none;
 `}
+
 padding: .5rem;
 cursor: pointer;
 `;
@@ -120,4 +130,5 @@ const Toggle = styled.span`
 cursor: pointer;
 border: .01rem solid black;
 padding: .1rem;
+
 `;
