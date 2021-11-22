@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import React, {useState} from 'react'
 
 function Pagination({currentPage, setCurrentPage, numOfPages}) {
-    const [first, setFirst] = useState(1)
+    const [first, setFirst] = useState(0)
     const [last, setLast] = useState(5)
 
     let pageNumbers = []
@@ -11,7 +11,7 @@ function Pagination({currentPage, setCurrentPage, numOfPages}) {
       pageNumbers.push(i);
     }
     
-    let Nums = pageNumbers.slice(first-1, last)
+    let Nums = pageNumbers.slice(first, last)
 
     //handling the next and prev buttons
     const handleNavClick = (e, navType) => {
@@ -41,15 +41,18 @@ const toggleEnds = (e, end) => {
     e.preventDefault();
     if (end==='first') {
         setCurrentPage(1);
-        setFirst(1);
+        setFirst(0);
         setLast(5);
     }
 
-    else if (end==='last')  {
+    else if (end==='last' && pageNumbers.length>=5)  {
         setCurrentPage(pageNumbers.length);
         setLast(pageNumbers.length);
-        setFirst(pageNumbers.length-4);
+        setFirst(pageNumbers.length-5);
+    }
 
+    else {
+        setCurrentPage(pageNumbers.length)
     }
 }
 
@@ -57,13 +60,13 @@ const toggleEnds = (e, end) => {
         <>
         {numOfPages>1 &&
                 <Container>
-                    <Toggle onClick={(e)=> toggleEnds(e, 'first') } >First</Toggle>
+                    <Toggle type="first" currentPage={currentPage} lastPage={pageNumbers.length} onClick={(e)=> toggleEnds(e, 'first') } >First</Toggle>
                     <PaginationNav type="prev" currentPage={currentPage} lastPage={pageNumbers.length} onClick={(e)=>{ handleNavClick(e,'prev')}} />
                 {Nums.map((num)=>{
                     return<Number key={num} active={currentPage} thisNum={num} onClick={(e)=>{e.preventDefault(); setCurrentPage(num)}}>{num}</Number>
                 })} 
                 <PaginationNav type="next" currentPage={currentPage} lastPage={pageNumbers.length}  onClick={(e)=>{ handleNavClick(e,'next')}}/>
-                <Toggle onClick={(e)=> toggleEnds(e, 'last')}>Last</Toggle>
+                <Toggle type="last" currentPage={currentPage} lastPage={pageNumbers.length} onClick={(e)=> toggleEnds(e, 'last')}>Last</Toggle>
              </Container>
         }
 
@@ -130,5 +133,10 @@ const Toggle = styled.span`
 cursor: pointer;
 border: .01rem solid black;
 padding: .1rem;
-
+${({currentPage, type})=>type ==='first' && currentPage===1 && css`
+display: none;
+`}
+${({currentPage, lastPage, type})=>type ==='last' && currentPage===lastPage && css`
+display: none;
+`}
 `;
