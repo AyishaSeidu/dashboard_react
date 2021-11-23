@@ -4,10 +4,14 @@ import React, {useContext, useState} from 'react';
 import { DataContext } from './Page';
 
 function NavBar() {
-let {setQuery} = useContext(DataContext)
+let {setQuery, query} = useContext(DataContext)
 const [expandContent, setExpandContent] = useState(false);
-const [selectedItem, setSelectedItem] = useState('');
 const [openMenuBar, setOpenMenuBar] = useState(false);
+
+const handleNavSelection =(e, selectedItem) => {
+e.preventDefault();
+setQuery(selectedItem);
+}
     return (
         <NavBarContainer>
             <SiteHeading > User Engagement Dashboard</SiteHeading>
@@ -16,23 +20,23 @@ const [openMenuBar, setOpenMenuBar] = useState(false);
 <NavContainer animation={showNavAnimation} open={openMenuBar} >
     <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu>
 
-<NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('analytics'); setQuery("analytics")}} > Analytics</NavItem>
+<NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > Analytics</NavItem>
 
             <ContentToggle expand = {expandContent} onClick={(e)=>{e.preventDefault(); setExpandContent(!expandContent)}} >Content</ContentToggle> 
             {expandContent===true && (
             <>
                 
-                <NavItem id ={'albums'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('albums'); setQuery('albums')}} >  Albums</NavItem>
+                <NavItem id ={'albums'} selected={query} onClick={(e)=>{handleNavSelection(e, 'albums')}} > <Icon src='./albums.png' /> Albums</NavItem>
 
-                <NavItem id ={'comments'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('comments'); setQuery('comments')}}> Comments</NavItem>
+                <NavItem id ={'comments'} selected={query} onClick={(e)=>{handleNavSelection(e, 'comments')}}>  <Icon src='./comments.png' /> Comments</NavItem>
 
-                <NavItem id ={'photos'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('photos');setQuery('photos')}} > Photos</NavItem>
+                <NavItem id ={'photos'} selected={query} onClick={(e)=>{handleNavSelection(e, 'photos')}} >  <Icon src='./photos.png' /> Photos</NavItem>
 
-                <NavItem id ={'posts'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('posts'); setQuery('posts')}}> Posts</NavItem>
+                <NavItem id ={'posts'} selected={query} onClick={(e)=>{handleNavSelection(e, 'posts')}}>  <Icon src='./posts.png' /> Posts</NavItem>
                 
-                <NavItem id ={'todos'} selected={selectedItem}  onClick={(e)=>{e.preventDefault(); setSelectedItem('todos'); setQuery('todos')}}> Todos</NavItem>
+                <NavItem id ={'todos'} selected={query}  onClick={(e)=>{handleNavSelection(e, 'todos')}}>  <Icon src='./todos.png' /> Todos</NavItem>
 
-                <NavItem id ={'users'} selected={selectedItem} onClick={(e)=>{e.preventDefault(); setSelectedItem('users'); setQuery('users')}}> Users</NavItem>
+                <NavItem id ={'users'} selected={query} onClick={(e)=>{handleNavSelection(e, 'users')}}>  <Icon src='./users.png' /> Users</NavItem>
             
             </>
             
@@ -93,14 +97,14 @@ cursor: pointer;
 }
 `;
 
-const NavItem = styled.div`
+const NavItem = styled.span`
 padding: 1rem;
 font-size: 0.8rem;
 margin-left: 0;
 height: 1.2rem;
 border-bottom: 0.1rem solid whitesmoke;
 border-radius: 0.2rem;
-
+display: block;
 ${({id, selected})=> id===selected && css`
   color: #0e1e25;
   background-color: whitesmoke;
@@ -127,12 +131,13 @@ font-size: 1rem;
 `;
 
 const Icon = styled.img`
-    width: 30%;
-    height: 80%;
+    width: 1rem;
+    height: 1rem;
     background-color: white;
-    padding: 0.2rem;
-    display: inline;
-    border-radius: 50%;
+    padding: 0.1rem;
+    //display: inline;
+    justify-self: center;
+    border-radius: .5rem;
 
 `;
 
@@ -190,6 +195,5 @@ const showNavAnimation = keyframes`
     transform: translateX(1rem);
 
 };
-
 `;
 
