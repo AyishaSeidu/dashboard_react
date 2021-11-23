@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import {css, keyframes} from '@emotion/react'
 import React, {useContext, useState} from 'react';
+import {Music, MessageCircle, Camera, FileText, List, Users, Activity} from 'react-feather'
 import { DataContext } from './Page';
 
 function NavBar() {
@@ -20,23 +21,23 @@ setQuery(selectedItem);
 <NavContainer animation={showNavAnimation} open={openMenuBar} >
     <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu>
 
-<NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > Analytics</NavItem>
+<NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > <Activity/> Analytics</NavItem>
 
             <ContentToggle expand = {expandContent} onClick={(e)=>{e.preventDefault(); setExpandContent(!expandContent)}} >Content</ContentToggle> 
             {expandContent===true && (
             <>
                 
-                <NavItem id ={'albums'} selected={query} onClick={(e)=>{handleNavSelection(e, 'albums')}} > <Icon src='./albums.png' /> Albums</NavItem>
+                <NavItem id ={'albums'} selected={query} onClick={(e)=>{handleNavSelection(e, 'albums')}} > <Music/>Albums</NavItem>
 
-                <NavItem id ={'comments'} selected={query} onClick={(e)=>{handleNavSelection(e, 'comments')}}>  <Icon src='./comments.png' /> Comments</NavItem>
+                <NavItem id ={'comments'} selected={query} onClick={(e)=>{handleNavSelection(e, 'comments')}}> <MessageCircle/> Comments</NavItem>
 
-                <NavItem id ={'photos'} selected={query} onClick={(e)=>{handleNavSelection(e, 'photos')}} >  <Icon src='./photos.png' /> Photos</NavItem>
+                <NavItem id ={'photos'} selected={query} onClick={(e)=>{handleNavSelection(e, 'photos')}} >  <Camera/> Photos</NavItem>
 
-                <NavItem id ={'posts'} selected={query} onClick={(e)=>{handleNavSelection(e, 'posts')}}>  <Icon src='./posts.png' /> Posts</NavItem>
+                <NavItem id ={'posts'} selected={query} onClick={(e)=>{handleNavSelection(e, 'posts')}}>  <FileText/> Posts</NavItem>
                 
-                <NavItem id ={'todos'} selected={query}  onClick={(e)=>{handleNavSelection(e, 'todos')}}>  <Icon src='./todos.png' /> Todos</NavItem>
+                <NavItem id ={'todos'} selected={query}  onClick={(e)=>{handleNavSelection(e, 'todos')}}>  <List/> Todos</NavItem>
 
-                <NavItem id ={'users'} selected={query} onClick={(e)=>{handleNavSelection(e, 'users')}}>  <Icon src='./users.png' /> Users</NavItem>
+                <NavItem id ={'users'} selected={query} onClick={(e)=>{handleNavSelection(e, 'users')}}>  <Users/> Users</NavItem>
             
             </>
             
@@ -98,16 +99,13 @@ cursor: pointer;
 `;
 
 const NavItem = styled.span`
-padding: 1rem;
+padding: 1rem .5rem;
 font-size: 0.8rem;
-margin-left: 0;
-height: 1.2rem;
-border-bottom: 0.1rem solid whitesmoke;
-border-radius: 0.2rem;
+//border-bottom: 0.1rem solid whitesmoke;
+//border-radius: 0.3rem;
 display: block;
 ${({id, selected})=> id===selected && css`
-  color: #0e1e25;
-  background-color: whitesmoke;
+  color: #00c7b6;
 `
 }
 `;
@@ -115,8 +113,7 @@ ${({id, selected})=> id===selected && css`
 const ContentToggle = styled.div`
 cursor: pointer;
 padding-top: 1rem;
-margin-left: 0;
-margin-top: 0;
+
 font-size: 1rem;
 ::after {
     content: ' \\276F';
@@ -134,8 +131,9 @@ const Icon = styled.img`
     width: 1rem;
     height: 1rem;
     background-color: white;
-    padding: 0.1rem;
-    //display: inline;
+    padding: 0.15rem;
+    float: left;
+    margin-left: 2rem;
     justify-self: center;
     border-radius: .5rem;
 
