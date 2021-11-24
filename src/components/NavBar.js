@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import {css, keyframes} from '@emotion/react'
 import React, {useContext, useState} from 'react';
-import {Music, MessageCircle, Camera, FileText, List, Users, BarChart2, Menu} from 'react-feather'
+import {Music, MessageCircle, Camera, FileText, List, Users, BarChart2, Menu,X} from 'react-feather'
 import { DataContext } from './Page';
 
 function NavBar() {
@@ -14,18 +14,18 @@ e.preventDefault();
 setQuery(selectedItem);
 }
     return (
-        <NavBarContainer>
+        <NavBarContainer onClick={(e)=>e.preventDefault()}>
             <SiteHeading > User Engagement Dashboard</SiteHeading>
           
 
-<NavContainer animation={showNavAnimation} open={openMenuBar} >
-    <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu>
+<NavContainer animation={showNavAnimation} open={openMenuBar} onClick={(e)=>e.preventDefault()} >
+    {/* <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu> */}
 
 <NavItem style={{fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > <BarChart2 size={20}/> Analytics</NavItem>
 
             <ContentToggle expand = {expandContent} onClick={(e)=>{e.preventDefault(); setExpandContent(!expandContent)}} >Content</ContentToggle> 
+            
             <Options expandContent={expandContent} >
-                
                 <NavItem id ={'albums'} selected={query} onClick={(e)=>{handleNavSelection(e, 'albums')}} > <Music size={20} />Albums</NavItem>
 
                 <NavItem id ={'comments'} selected={query} onClick={(e)=>{handleNavSelection(e, 'comments')}}> <MessageCircle size={20} /> Comments</NavItem>
@@ -42,10 +42,15 @@ setQuery(selectedItem);
         
             </NavContainer>
 
-<SideToggle onClick={(e)=>{e.preventDefault(); setOpenMenuBar(true)}}>
-    <ToggleBar/>
-    <ToggleBar/>
-    <ToggleBar/>
+<SideToggle onClick={(e)=>{e.preventDefault(); setOpenMenuBar(!openMenuBar)}} >
+    {
+        openMenuBar ? (
+            <X size={27} />
+    ) : (
+<Menu size={27}/>
+    )
+    }
+    
 </SideToggle>
         </NavBarContainer>
     )
@@ -57,7 +62,6 @@ const NavBarContainer = styled.div`
 background-color: ${({theme})=>theme.colors.secondary};
 color:${({theme})=>theme.colors.primary};
 grid-area: navbar;
-
 @media(${({theme})=>theme.mediaquery.smallScreens}) {
     width: 100vw;
     height: 100%;
@@ -69,6 +73,17 @@ grid-area: navbar;
 
 `;
 
+//animation for nav item
+const showNavAnimation = keyframes`
+0% {
+    transform: translateX(20rem);
+}
+100% {
+    transform: translateX(1rem);
+
+};
+`;
+
 const NavContainer = styled.div`
 cursor: pointer;
 //styling for small screens
@@ -77,16 +92,16 @@ cursor: pointer;
     right: 0;
     top: 3rem;
     justify-self: right;
-    height: 100vh;
-    width: 100vw;
-    overflow: auto;
+    height: 0;
+    width: auto;
     background-color: inherit;
-    display: none
+    overflow: hidden;
+    transition: height 1s ease-in;
 
     //toggling menu bar on small screens
     ${({open})=> open===true && css`
-    display: inherit;
-    animation: ${showNavAnimation} ease-in 1s;
+    height: 70vh;
+    overflow: auto;
 `
 }
 }
@@ -100,7 +115,7 @@ display: flex;
 flex-direction: row;
 gap: .1rem;
 align-items: center;
-clear: both;
+//clear: both;
 align-self: center;
 ${({id, selected})=> id===selected && css`
   color: #00c7b6;
@@ -112,9 +127,10 @@ const ContentToggle = styled.div`
 cursor: pointer;
 padding: 1rem 0rem;
 font-size: 1rem;
+margin-left: -3rem;
 display: block;
-float: left;
-margin-left: 1.5rem;
+//float: left;
+//margin-left: 1.5rem;
 ::after {
     content: ' \\276F';
     display: inline-block;
@@ -173,21 +189,12 @@ display: none;
 }
 `;
 
-//animation for nav item
-const showNavAnimation = keyframes`
-0% {
-    transform: translateX(20rem);
-}
-100% {
-    transform: translateX(1rem);
 
-};
-`;
 
 const Options = styled.div`
 visibility: hidden;
 opacity: 0;
-transition: visibility 1s, opacity 1.5s;
+transition: visibility 1.5s ease-in, opacity 1.5s ease-in;
 
 ${({expandContent})=> expandContent===true && css`
 visibility: visible;
