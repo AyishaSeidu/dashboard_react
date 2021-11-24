@@ -136,19 +136,21 @@ const PageContainer = styled.div`
   display: grid;
 
   grid-gap: 0.5em;
-  grid-template-rows: 3rem 2rem 1fr;
-  grid-template-areas:
-    "navbar"
-    "pageHead"
-    "content";
 
-  @media (${({ theme }) => theme.mediaquery.largeScreens}) {
     grid-template-rows: 2rem 1fr 1fr;
     grid-template-columns: 11rem 1fr;
     grid-template-areas:
       "navbar pageHead"
       "navbar content"
       "navbar content";
+      
+  @media (${({ theme }) => theme.mediaquery.smallScreens}) {
+    grid-template-rows: 3rem 2rem 1fr;
+    grid-template-columns: 1fr;
+  grid-template-areas:
+    "navbar"
+    "pageHead"
+    "content";
   }
 `;
 const Head = styled.div`

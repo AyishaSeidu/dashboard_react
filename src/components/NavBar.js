@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import {css, keyframes} from '@emotion/react'
 import React, {useContext, useState} from 'react';
-import {Music, MessageCircle, Camera, FileText, List, Users, Activity} from 'react-feather'
+import {Music, MessageCircle, Camera, FileText, List, Users, BarChart2, Menu} from 'react-feather'
 import { DataContext } from './Page';
 
 function NavBar() {
@@ -21,27 +21,25 @@ setQuery(selectedItem);
 <NavContainer animation={showNavAnimation} open={openMenuBar} >
     <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu>
 
-<NavItem style={{border: 'none', fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > <Activity/> Analytics</NavItem>
+<NavItem style={{fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > <BarChart2 size={20}/> Analytics</NavItem>
 
             <ContentToggle expand = {expandContent} onClick={(e)=>{e.preventDefault(); setExpandContent(!expandContent)}} >Content</ContentToggle> 
-            {expandContent===true && (
-            <>
+            <Options expandContent={expandContent} >
                 
-                <NavItem id ={'albums'} selected={query} onClick={(e)=>{handleNavSelection(e, 'albums')}} > <Music/>Albums</NavItem>
+                <NavItem id ={'albums'} selected={query} onClick={(e)=>{handleNavSelection(e, 'albums')}} > <Music size={20} />Albums</NavItem>
 
-                <NavItem id ={'comments'} selected={query} onClick={(e)=>{handleNavSelection(e, 'comments')}}> <MessageCircle/> Comments</NavItem>
+                <NavItem id ={'comments'} selected={query} onClick={(e)=>{handleNavSelection(e, 'comments')}}> <MessageCircle size={20} /> Comments</NavItem>
 
-                <NavItem id ={'photos'} selected={query} onClick={(e)=>{handleNavSelection(e, 'photos')}} >  <Camera/> Photos</NavItem>
+                <NavItem id ={'photos'} selected={query} onClick={(e)=>{handleNavSelection(e, 'photos')}} >  <Camera size={20} /> Photos</NavItem>
 
-                <NavItem id ={'posts'} selected={query} onClick={(e)=>{handleNavSelection(e, 'posts')}}>  <FileText/> Posts</NavItem>
+                <NavItem id ={'posts'} selected={query} onClick={(e)=>{handleNavSelection(e, 'posts')}}>  <FileText size={20} /> Posts</NavItem>
                 
-                <NavItem id ={'todos'} selected={query}  onClick={(e)=>{handleNavSelection(e, 'todos')}}>  <List/> Todos</NavItem>
+                <NavItem id ={'todos'} selected={query}  onClick={(e)=>{handleNavSelection(e, 'todos')}}>  <List size={20} /> Todos</NavItem>
 
-                <NavItem id ={'users'} selected={query} onClick={(e)=>{handleNavSelection(e, 'users')}}>  <Users/> Users</NavItem>
+                <NavItem id ={'users'} selected={query} onClick={(e)=>{handleNavSelection(e, 'users')}}>  <Users size={20} /> Users</NavItem>
             
-            </>
-            
-            )}
+            </Options>
+        
             </NavContainer>
 
 <SideToggle onClick={(e)=>{e.preventDefault(); setOpenMenuBar(true)}}>
@@ -61,7 +59,6 @@ color:${({theme})=>theme.colors.primary};
 grid-area: navbar;
 
 @media(${({theme})=>theme.mediaquery.smallScreens}) {
-    
     width: 100vw;
     height: 100%;
     display: grid;
@@ -74,24 +71,21 @@ grid-area: navbar;
 
 const NavContainer = styled.div`
 cursor: pointer;
-
 //styling for small screens
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
-    position: fixed;
+    position: absolute;
     right: 0;
-    //top: 1rem;
+    top: 3rem;
     justify-self: right;
-    max-height: 100vh;
-    min-height: 70vh;
-    //top: 3rem;
+    height: 100vh;
+    width: 100vw;
     overflow: auto;
-    width: 50vw;
     background-color: inherit;
-    display: none;
+    display: none
 
     //toggling menu bar on small screens
     ${({open})=> open===true && css`
-    display: block;
+    display: inherit;
     animation: ${showNavAnimation} ease-in 1s;
 `
 }
@@ -99,11 +93,15 @@ cursor: pointer;
 `;
 
 const NavItem = styled.span`
-padding: 1rem .5rem;
-font-size: 0.8rem;
-//border-bottom: 0.1rem solid whitesmoke;
-//border-radius: 0.3rem;
-display: block;
+padding: .8rem;
+font-size: 0.7rem;
+margin-left: 2rem;
+display: flex;
+flex-direction: row;
+gap: .1rem;
+align-items: center;
+clear: both;
+align-self: center;
 ${({id, selected})=> id===selected && css`
   color: #00c7b6;
 `
@@ -112,13 +110,16 @@ ${({id, selected})=> id===selected && css`
 
 const ContentToggle = styled.div`
 cursor: pointer;
-padding-top: 1rem;
-
+padding: 1rem 0rem;
 font-size: 1rem;
+display: block;
+float: left;
+margin-left: 1.5rem;
 ::after {
     content: ' \\276F';
     display: inline-block;
     margin-left: 1rem;
+    transition: transform 1s ease-in;
     ${({expand})=> expand===true && css`
     transform: rotate(90deg);
 `
@@ -127,25 +128,13 @@ font-size: 1rem;
 
 `;
 
-const Icon = styled.img`
-    width: 1rem;
-    height: 1rem;
-    background-color: white;
-    padding: 0.15rem;
-    float: left;
-    margin-left: 2rem;
-    justify-self: center;
-    border-radius: .5rem;
-
-`;
-
 const SideToggle = styled.div`
 display: none;
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
     color: white;
     grid-area: contentNav;
-padding: 0.2rem;
-cursor: pointer;
+    padding: 0.2rem;
+    cursor: pointer;
     display: inherit;
 }
 `;
@@ -193,5 +182,16 @@ const showNavAnimation = keyframes`
     transform: translateX(1rem);
 
 };
+`;
+
+const Options = styled.div`
+visibility: hidden;
+opacity: 0;
+transition: visibility 1s, opacity 1.5s;
+
+${({expandContent})=> expandContent===true && css`
+visibility: visible;
+opacity: 1;
+`}
 `;
 
