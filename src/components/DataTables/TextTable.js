@@ -82,6 +82,7 @@ const TableAnimation = keyframes`
 }
 `;
 const TableBody = styled.tbody`
+display: contents;
 animation: ${TableAnimation} 2s ease-out;
 animation-fill-mode: forwards;
 
