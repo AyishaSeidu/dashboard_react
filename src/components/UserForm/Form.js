@@ -1,10 +1,21 @@
 import styled from '@emotion/styled'
-import React from 'react'
+import React from 'react';
+import PersonalDetails from './PersonalDetails';
+import ContactDetails from './ContactDetails';
+import GeographicDetails from './GeographicDetails';
+import CompanyDetails from './CompanyDetails';
 
 function Form() {
+
+
     return (
         <FormContainer>
-            Page Content goes here.......
+            <UserForm>
+            <PersonalDetails/>
+            <ContactDetails/>
+            <GeographicDetails/>
+            <CompanyDetails/>
+        </UserForm>
         </FormContainer>
     )
 }
@@ -17,4 +28,8 @@ margin: auto;
 grid-area: content;
 width: 100%;
 height: 100%;
+`;
+
+const UserForm = styled.form`
+
 `;

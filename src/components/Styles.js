@@ -38,3 +38,8 @@ border-color: #00c7b6;
 animation: ${DataAnimation} 2s ease-out;
 animation-fill-mode: forwards;
 `;
+
+//styling for adding user 
+const InputBox = styled.input`
+
+`;
