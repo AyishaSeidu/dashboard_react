@@ -108,17 +108,27 @@ grid-area: charts;
 display: grid;
 height: 100%;
 width: 100%;
-margin: 0.5rem auto;
+overflow: auto;
+//margin: 0.5rem auto;
 background-color: white;
 grid-gap: 1rem;
 grid-template-columns: repeat(3, 1fr);
 grid-template-areas: 'doughnut albumChart postChart';
-@media (${({theme})=>theme.mediaquery.smallScreens}) {
+
+@media (${({theme})=>theme?.mediaquery.smallScreens}) {
 grid-template-columns: 1fr;
 grid-template-rows: repeat(3, 1fr);
 grid-template-areas: 
 'doughnut' 
 'albumChart'
 'postChart'; 
+}
+@media ${({theme})=>theme?.mediaquery.mediumScreens} {
+grid-template-columns: repeat(2, 1fr);
+grid-template-rows: repeat(2, 1fr);
+grid-template-areas: 
+'doughnut albumChart' 
+'postChart postChart'
+; 
 }
 `;
