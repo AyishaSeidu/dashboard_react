@@ -17,6 +17,10 @@ function Page() {
     { username: "admin", password: "admin_test", permissionLevel: "admin" },
     { username: "Ayi", password: "hisham", permissionLevel: "user" },
   ];
+
+  //user form
+  const [inputMode, setInputMode] = useState(false)
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
@@ -113,10 +117,25 @@ function Page() {
             <DotLoader css={spinnerCSS} />
           ) : (
             <>
-            <Head>{query}</Head>
-              {loggedIn && query === "analytics" && <Analytics />}
-              {loggedIn && query !== "analytics" && <DataTable/>}
+              {inputMode ? (
+                <>
+                <Form/>
+                <AddButton onClick={(e)=> {e.preventDefault(); setInputMode(false)}}>Back to Users</AddButton>
+                </>
+              ): (
+                <>
+                <Head>{query}</Head>
+                  {loggedIn && query === "analytics" && <Analytics />}
+                  {loggedIn && query !== "analytics" &&
+                  <>
+                  {query==="users" && <AddButton onClick={(e)=> {e.preventDefault(); setInputMode(true)}}>Add User +</AddButton> }
+                  <DataTable/>
+                  </>
+                  }
+                </>
+              )}
             </>
+
           )}
         </DataContext.Provider>
       </PageContainer>
@@ -137,19 +156,19 @@ const PageContainer = styled.div`
   grid-gap: 0.5em;
 
   grid-template-rows: 2rem 1fr 1fr;
-  grid-template-columns: 11rem 1fr;
+  grid-template-columns: 11rem 1fr 5rem;
   grid-template-areas:
-      "navbar pageHead"
-      "navbar content"
-      "navbar content";
+      "navbar pageHead addUserButton"
+      "navbar content content"
+      "navbar content content";
       
   @media (${({ theme }) => theme.mediaquery.smallScreens}) {
     grid-template-rows: 3rem 2rem 1fr;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 5rem;
   grid-template-areas:
-    "navbar"
-    "pageHead"
-    "content";
+    "navbar navbar"
+    "pageHead addUserButton"
+    "content content";
   }
 `;
 const Head = styled.div`
@@ -158,4 +177,24 @@ align-self: center;
 font-size: 3vh;
 font-weight: bold;
 text-transform: capitalize;
+`;
+
+const AddButton = styled.div`
+grid-area: addUserButton;
+background-color: #00c7b6;
+height: 50%;
+width: 70%;
+cursor: pointer;
+color: white;
+font-size: .5rem;
+border: .1rem solid #00c7b6;
+border-radius: .5rem;
+align-self: center;
+text-align: center;
+margin: 1rem auto;
+:hover {
+  border-color: black;
+  height: 60%;
+  font-size: .7rem;
+}
 `;
