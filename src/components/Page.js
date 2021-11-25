@@ -134,12 +134,11 @@ const PageContainer = styled.div`
   width: 100vw;
   font-size: 1vw;
   display: grid;
-
   grid-gap: 0.5em;
 
-    grid-template-rows: 2rem 1fr 1fr;
-    grid-template-columns: 11rem 1fr;
-    grid-template-areas:
+  grid-template-rows: 2rem 1fr 1fr;
+  grid-template-columns: 11rem 1fr;
+  grid-template-areas:
       "navbar pageHead"
       "navbar content"
       "navbar content";

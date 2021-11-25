@@ -45,7 +45,7 @@ function Login( {appUsers, setLoggedIn, setCurrentUser}) {
         
                 <InputField type='password' placeholder='password' onChange={(e)=>{e.preventDefault(); setPassword(e.target.value)}} wrongEntry={wrongCredentials} />
          
-                <SubmitButton value='Login' type='submit'/>
+                <SubmitButton type='submit' onClick={(e)=>{e.preventDefault(); signIn(username, password)}}>Login</SubmitButton>
             </Form>
        </>
     )
@@ -54,18 +54,16 @@ function Login( {appUsers, setLoggedIn, setCurrentUser}) {
 export default Login
 
 const Form = styled.form`
-margin: auto;
+margin: 1rem auto;
 border: 0.1rem solid lightgrey;
 width: 70%;
 height: 50%;
 padding: 1rem;
-margin-top: 10%;
 grid-area: content;
 background-color: white;
 @media(${({theme})=>theme.mediaquery.largeScreens1}) {
-width: 30%;
-height: 50%;
-margin-left: 30%;
+width: 20rem;
+height: 20rem;
 }
 `;
 
@@ -99,28 +97,31 @@ font-style: italic;
 }
 `;
 
-const SubmitButton = styled.input`
+const SubmitButton = styled.button`
 background-color: green;
 height: 3rem;
 width: 7rem;
 color: white;
-margin: auto;
+margin: 2rem auto;
 bottom: 2rem;
 cursor: pointer;
 border-radius: 0.5rem;
+position: relative;
 `;
 
-const FormHeader = styled.div`
+const FormHeader = styled.span`
 font-size: 1rem;
 width: 50%;
 align-items: center;
 color: red;
 margin: auto;
 padding: 0.5rem;
+display: block;
 `;
 
 const ErrorMessage = styled.span`
 color: red;
 font-size: 0.5rem;
 font-style: italic;
+display: block;
 `;
