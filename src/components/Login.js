@@ -5,21 +5,20 @@ import React, {useState} from 'react'
 function Login( {appUsers, setLoggedIn, setCurrentUser}) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [wrongUsername, setWrongUsername] = useState(false);
-    const [wrongPassword, setWrongPassword] = useState(false)
+    const [wrongCredentials, setWrongCredentials] = useState(false);
+    //const [wrongPassword, setWrongPassword] = useState(false)
 
     const signIn = (username, password) =>{
         //check if the user details supplied exists in the appUsers list
-        setWrongPassword(false);
-        setWrongUsername(false);
+        setWrongCredentials(false)
         if (!appUsers.some((user)=>user.username===username)) {
            //alert('incorrect username and password');
-           setWrongUsername(true)
+           setWrongCredentials(true)
             return;
         }
 
         else if (appUsers.some((user)=>user.username===username) && !appUsers.some((user)=>user.password===password)) {
-       setWrongPassword(true)
+       setWrongCredentials(true)
        return;
         }
 
@@ -28,7 +27,7 @@ function Login( {appUsers, setLoggedIn, setCurrentUser}) {
             setLoggedIn(true)
         }
         else {
-            alert('user not found')
+            //alert('user not found')
             return;
         }
     }
@@ -41,11 +40,10 @@ function Login( {appUsers, setLoggedIn, setCurrentUser}) {
            
             <Form onSubmit={(e)=>{e.preventDefault(); signIn(username, password)}}>
             <FormHeader> Sign In </FormHeader>
-               {wrongUsername && <ErrorMessage>Incorrect username, please try again</ErrorMessage>} 
-               {wrongPassword && <ErrorMessage>Incorrect password, please try again</ErrorMessage>}
-                <InputField type='text' placeholder='username' onChange={(e)=>{e.preventDefault(); setUsername(e.target.value)}} wrongEntry={wrongUsername}/>
+               {wrongCredentials && <ErrorMessage>Incorrect username or password, please try again</ErrorMessage>} 
+                <InputField type='text' placeholder='username' onChange={(e)=>{e.preventDefault(); setUsername(e.target.value)}} wrongEntry={wrongCredentials}/>
         
-                <InputField type='password' placeholder='password' onChange={(e)=>{e.preventDefault(); setPassword(e.target.value)}} wrongEntry={wrongPassword} />
+                <InputField type='password' placeholder='password' onChange={(e)=>{e.preventDefault(); setPassword(e.target.value)}} wrongEntry={wrongCredentials} />
          
                 <SubmitButton value='Login' type='submit'/>
             </Form>
