@@ -179,22 +179,20 @@ font-weight: bold;
 text-transform: capitalize;
 `;
 
-const AddButton = styled.div`
+const AddButton = styled.button`
 grid-area: addUserButton;
 background-color: #00c7b6;
-height: 50%;
-width: 70%;
 cursor: pointer;
 color: white;
-font-size: .5rem;
+font-size: 0.7rem;
 border: .1rem solid #00c7b6;
 border-radius: .5rem;
-align-self: center;
+margin: .2rem;
 text-align: center;
-margin: 1rem auto;
+padding: 0.1rem;
 :hover {
   border-color: black;
-  height: 60%;
-  font-size: .7rem;
+  //height: 60%;
+  //font-size: .7rem;
 }
 `;
