@@ -40,6 +40,11 @@ animation-fill-mode: forwards;
 `;
 
 //styling for adding user 
-const InputBox = styled.input`
+export const InputBox = styled.input`
+`;
 
+export const FormField = styled.fieldset``
+
+export const InputLabel = styled.label`
+display: block;
 `;

@@ -1,8 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react';
 import PersonalDetails from './PersonalDetails';
-import ContactDetails from './ContactDetails';
-import GeographicDetails from './GeographicDetails';
+import AddressDetails from './AddressDetails';
 import CompanyDetails from './CompanyDetails';
 
 function Form() {
@@ -12,8 +11,7 @@ function Form() {
         <FormContainer>
             <UserForm>
             <PersonalDetails/>
-            <ContactDetails/>
-            <GeographicDetails/>
+            <AddressDetails/>
             <CompanyDetails/>
         </UserForm>
         </FormContainer>
@@ -31,5 +29,5 @@ height: 100%;
 `;
 
 const UserForm = styled.form`
-
+display: block;
 `;
