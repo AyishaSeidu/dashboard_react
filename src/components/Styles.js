@@ -48,3 +48,7 @@ export const FormField = styled.fieldset``
 export const InputLabel = styled.label`
 display: block;
 `;
+
+export const SubmitButton = styled.button`
+display: block;
+`;
