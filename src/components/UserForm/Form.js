@@ -8,7 +8,7 @@ import CompanyDetails from './CompanyDetails';
 export const FormVariables = React.createContext()
 
 function Form() {
-
+const [submitting, setSubmitting] = useState(false);
 const [formData] = useState({
     name: "",
     username: "",
@@ -33,7 +33,6 @@ const [formData] = useState({
   });
 
   const setObjectProperty = (object={}, path=[], newValue) => {
-console.log(path)
     if (path.length ===0) {
         return;
     }
@@ -41,19 +40,17 @@ console.log(path)
     else {
 
         if (!object.hasOwnProperty(path[0])) {
-            console.log(`${path[0]} is not a property of the object`);
+            console.log('path does not exist');
             return;
         }
         
         else if (path.length===1) {
         object[path[0]] = newValue;
-        console.log(formData);
         return;
     }
         else {
         let newObject = object[path[0]];
         path.shift();
-        //console.log(newPath)
         setObjectProperty(newObject, path, newValue)
      }
 
@@ -61,13 +58,36 @@ console.log(path)
   }
 
   const handleFormInput = (e, path, value) => {
-      //console.log(path);
       e.preventDefault();
       setObjectProperty(formData, path, value)
   }
 
+//submitting form
+const submitForm = (url, data) => {
+setSubmitting(true);
+console.log(data)
+try {
+axios.post(url, data)
+.then((res)=> {
+console.log(res);
+setSubmitting(false);
+})
+}
+
+catch (error) {
+console.log(error);
+setSubmitting(false);
+}
+
+}
+
     return (
-        <FormVariables.Provider value={{formData, handleFormInput}} >
+    <>
+    {submitting ? (<div>Submitting...</div>): 
+
+    (
+        <>
+        <FormVariables.Provider value={{formData, handleFormInput, submitForm}} >
         <FormContainer>
             <UserForm>
             <PersonalDetails/>
@@ -76,6 +96,14 @@ console.log(path)
         </UserForm>
         </FormContainer>
         </FormVariables.Provider>
+
+        </>
+    )
+    
+}
+
+
+        </>
     )
 }
 

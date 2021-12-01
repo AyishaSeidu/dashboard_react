@@ -4,7 +4,7 @@ import {FormVariables} from './Form'
 
 function CompanyDetails() {
 
-    const {formData, handleFormInput} = useContext(FormVariables)
+    const {formData, handleFormInput, submitForm} = useContext(FormVariables)
     return (
         <FormField>
             <InputLabel for='companyName'>Company Name</InputLabel>            
@@ -16,7 +16,7 @@ function CompanyDetails() {
             <InputLabel for='bs'>Business Type</InputLabel>            
             <InputBox name = 'bs' placeholder = 'E.g. Tech' onChange={(e)=> {handleFormInput(e, ['company', 'bs'], e.target.value)}} defaultValue={formData.company.bs}/> 
 
-            <SubmitButton>Submit</SubmitButton>
+            <SubmitButton onClick={(e)=> {e.preventDefault(); submitForm('https://jsonplaceholder.typicode.com/users', formData)}}>Submit</SubmitButton>
         </FormField>
 
     )
