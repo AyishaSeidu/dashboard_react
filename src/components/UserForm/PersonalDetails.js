@@ -8,7 +8,8 @@ function PersonalDetails() {
 
     return (
         <FormField>
-            <InputLabel type ='text' for='fullname'>Full Name</InputLabel>            
+            <InputLabel type ='text' for='fullname'>Full Name
+            </InputLabel>            
             <InputBox name = 'fullname' placeholder = 'E.g Joe Block A' onChange={(e)=> { handleFormInput(e, ['name'], e.target.value)}} defaultValue={formData.name} /> 
 
             <InputLabel type ='text' for='username'>Username</InputLabel>            

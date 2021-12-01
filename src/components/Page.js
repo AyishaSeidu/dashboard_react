@@ -117,10 +117,10 @@ function Page() {
             <DotLoader css={spinnerCSS} />
           ) : (
             <>
-              {inputMode ? (
+              {inputMode && query==='users' ? (
                 <>
                 <Form/>
-                <AddButton onClick={(e)=> {e.preventDefault(); setInputMode(false)}}>Back to Users</AddButton>
+                <AddButton onClick={(e)=> {e.preventDefault(); setInputMode(false)}}>{`<< Back`}</AddButton>
                 </>
               ): (
                 <>

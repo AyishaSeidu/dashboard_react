@@ -41,12 +41,30 @@ animation-fill-mode: forwards;
 
 //styling for adding user 
 export const InputBox = styled.input`
+border: 0.05rem solid lightgray;
+width: 50%;
+justify-self: left;
+height: 2rem;
+::placeholder {
+    font-style: italic;
+    font-size: smaller;
+}
+:focus {
+    outline: none;
+}
 `;
 
-export const FormField = styled.fieldset``
+export const FormField = styled.fieldset`
+width: 80%;
+margin: auto;
+border: 0.1rem solid lightgray;
+`
 
 export const InputLabel = styled.label`
 display: block;
+//text-align: left;
+padding-top: 1rem;
+font-size: small;
 `;
 
 export const SubmitButton = styled.button`
