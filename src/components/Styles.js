@@ -11,7 +11,7 @@ align-items: center;
 border: 0.1rem solid lightgray;
 `;
 
-const DataAnimation = keyframes`
+export const DataAnimation = keyframes`
 0%{
     margin: 3rem auto;
 }
@@ -40,6 +40,15 @@ animation-fill-mode: forwards;
 `;
 
 //styling for adding user 
+const FadeIn = keyframes`
+from{
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+`;
+
 export const InputBox = styled.input`
 border: 0.05rem solid lightgray;
 
@@ -58,7 +67,7 @@ border-radius: 0.2rem;
 export const FormField = styled.fieldset`
 width: 80%;
 margin: 1rem auto;
-//border: 0.1rem solid lightgray;
+animation: ${FadeIn} 1s ease-in forwards;
 border: none;
 `
 

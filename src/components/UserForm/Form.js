@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import React, {useState } from 'react';
+import {DataAnimation} from '../Styles'
 import axios from 'axios';
 import PersonalDetails from './PersonalDetails';
 import AddressDetails from './AddressDetails';
@@ -120,6 +121,7 @@ font-size: 0.7rem;
 width: 70%;
 height: 95%;
 overflow: auto;
+animation: ${DataAnimation} 2s ease-in forwards;
 @media (${({ theme }) => theme.mediaquery.smallScreens}) {
 height: 80%;
   }
