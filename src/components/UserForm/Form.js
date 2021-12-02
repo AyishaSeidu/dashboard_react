@@ -9,6 +9,7 @@ export const FormVariables = React.createContext()
 
 function Form() {
 const [submitting, setSubmitting] = useState(false);
+const [formPage, setFormPage] = useState(1);
 const [formData] = useState({
     name: "",
     username: "",
@@ -87,12 +88,12 @@ setSubmitting(false);
 
     (
         <>
-        <FormVariables.Provider value={{formData, handleFormInput, submitForm}} >
+        <FormVariables.Provider value={{formData, handleFormInput, submitForm, setFormPage}} >
         <FormContainer>
             <UserForm>
-            <PersonalDetails/>
-            <AddressDetails/>
-            <CompanyDetails/>
+            {formPage===1 && <PersonalDetails/>}
+            {formPage===2 && <AddressDetails/>}
+            {formPage===3 && <CompanyDetails/>}
         </UserForm>
         </FormContainer>
         </FormVariables.Provider>
@@ -112,9 +113,12 @@ export default Form
 const FormContainer = styled.div`
 background-color: white;
 margin: auto;
+border-radius: 0.3rem;
 grid-area: content;
-width: 100%;
-height: 100%;
+text-align: left;
+font-size: 0.7rem;
+width: 70%;
+height: 95%;
 overflow: auto;
 `;
 

@@ -1,29 +1,44 @@
 import React, { useContext } from 'react';
-import {InputBox, FormField, InputLabel} from '../Styles';
+import {InputBox, FormField, InputLabel, FormNav, FormHead} from '../Styles';
 import {FormVariables} from './Form'
 
 function AddressDetails() {
-    const {formData, handleFormInput}  = useContext(FormVariables) 
+    const {formData, handleFormInput, setFormPage}  = useContext(FormVariables) 
     return (
         <FormField>
-            <InputLabel for='street'>Street Name</InputLabel>            
-            <InputBox name = 'street' placeholder = 'E.g. Liberation rd.' onChange={(e)=> {handleFormInput(e, ['address', 'street'], e.target.value)}} defaultValue={formData.address.street} /> 
+            <FormHead>Address Details</FormHead>
+            <InputLabel >Street Name
+            <InputBox name = 'street' type='text' onChange={(e)=> {handleFormInput(e, ['address', 'street'], e.target.value)}} defaultValue={formData.address.street} /> 
+            </InputLabel>            
+            
 
-            <InputLabel for='suite'>Suite</InputLabel>            
-            <InputBox name = 'suite' placeholder = 'E.g Apt. 123' onChange={(e)=> {; handleFormInput(e, ['address', 'suite'], e.target.value)}} defaultValue={formData.address.suite} /> 
+            <InputLabel >Suite / Apt. No
+            <InputBox name = 'suite'type='text' onChange={(e)=> {; handleFormInput(e, ['address', 'suite'], e.target.value)}} defaultValue={formData.address.suite} /> 
+            </InputLabel>            
+            
 
-            <InputLabel for='city'>City</InputLabel>            
-            <InputBox name = 'city' placeholder = 'E.g. Accra' onChange={(e)=> {; handleFormInput(e, ['address', 'city'], e.target.value)}} defaultValue={formData.address.city} /> 
+            <InputLabel>City
+            <InputBox name = 'city'  type='text' onChange={(e)=> {; handleFormInput(e, ['address', 'city'], e.target.value)}} defaultValue={formData.address.city} /> 
+            </InputLabel>            
+            
 
-            <InputLabel for='zipcode'>Zipcode</InputLabel>            
-            <InputBox name = 'zipcode' placeholder = 'E.g. LB-123-4567' onChange={(e)=> {; handleFormInput(e, ['address', 'zipcode'], e.target.value)}} defaultValue={formData.address.zipcode} /> 
+            <InputLabel >Zipcode
+            <InputBox name = 'zipcode' type='text' onChange={(e)=> {; handleFormInput(e, ['address', 'zipcode'], e.target.value)}} defaultValue={formData.address.zipcode}/> 
+            </InputLabel>            
+           
 
-            <InputLabel for='lat'>Latitude</InputLabel>            
-            <InputBox name = 'lat' placeholder = 'E.g. -37.3159' onChange={(e)=> {; handleFormInput(e, ['address','geo', 'lat'], e.target.value)}} defaultValue={formData.address.geo.lat} /> 
+            <InputLabel >Latitude
+            <InputBox name = 'lat' type='text' placeholder = '-37.3159' onChange={(e)=> {; handleFormInput(e, ['address','geo', 'lat'], e.target.value)}} defaultValue={formData.address.geo.lat} /> 
+            </InputLabel>            
+           
 
-            <InputLabel for='lng'>Longitude</InputLabel>            
-            <InputBox name = 'lng' placeholder = 'E.g. 81.1496' onChange={(e)=> {; handleFormInput(e, ['address', 'geo', 'lng'], e.target.value)}} defaultValue={formData.address.geo.lng} /> 
+            <InputLabel >Longitude
+            <InputBox name = 'lng' type='text' placeholder = '81.1496' onChange={(e)=> {; handleFormInput(e, ['address', 'geo', 'lng'], e.target.value)}} defaultValue={formData.address.geo.lng} /> 
+            </InputLabel>            
 
+
+            <FormNav onClick={(e)=> {e.preventDefault(); setFormPage(1)}}>Prev</FormNav>
+            <FormNav direction={'next'}  onClick={(e)=> {e.preventDefault(); setFormPage(3)}}>Next</FormNav>
         </FormField>
     )
 }
