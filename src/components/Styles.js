@@ -74,15 +74,31 @@ padding: 0.5rem;
 
 export const SubmitButton = styled.button`
 display: block;
+margin: 2rem auto;
+pad: 1rem;
+cursor: pointer;
+color: white;
+background-color: green;
+border: .2rem solid green;
+width: 5rem;
+height: 2rem;
+border-radius: 0.5rem;
+:hover {
+    height: 2.5rem;
+    font-size: 1rem;
+}
 `;
 
 export const FormNav = styled.button`
 cursor: pointer;
-margin: 1rem 3rem;
 align-content: left;
-${({direction})=>direction==='next' && css`
-align-content: right;
-`}
+color: white;
+background-color: red;
+border: 0.1rem solid red;
+border-radius: .2rem;
+margin: 0.5rem;
+padding: .5rem;
+width: 4rem;
 `;
 
 export const FormHead = styled.legend`

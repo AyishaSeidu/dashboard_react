@@ -120,6 +120,9 @@ font-size: 0.7rem;
 width: 70%;
 height: 95%;
 overflow: auto;
+@media (${({ theme }) => theme.mediaquery.smallScreens}) {
+height: 80%;
+  }
 `;
 
 const UserForm = styled.form`
