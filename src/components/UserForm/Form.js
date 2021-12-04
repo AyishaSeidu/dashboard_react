@@ -1,10 +1,10 @@
-import React, {useState } from 'react';
+import React, {useState, useContext } from 'react';
 import styled from '@emotion/styled';
 import {css} from '@emotion/react'
 import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
 import {DataAnimation} from '../Styles'
-
+import {DataContext} from '../Page'
 import PersonalDetails from './PersonalDetails';
 import AddressDetails from './AddressDetails';
 import CompanyDetails from './CompanyDetails';
@@ -12,8 +12,10 @@ import CompanyDetails from './CompanyDetails';
 export const FormVariables = React.createContext()
 
 function Form() {
+ const {setInputMode} = useContext(DataContext) 
 const [submitting, setSubmitting] = useState(false);
 const [formPage, setFormPage] = useState(1);
+const [submitted, setSubmitted] = useState(false);
 const [formData] = useState({
     name: "",
     username: "",
@@ -76,6 +78,7 @@ axios.post(url, data)
 .then((res)=> {
 console.log(res);
 setSubmitting(false);
+setSubmitted(true)
 })
 }
 
@@ -87,40 +90,45 @@ setSubmitting(false);
 }
 
     return (
-
-    
-
-    
  
         <FormVariables.Provider value={{formData, handleFormInput, submitForm, setFormPage}} >
         <FormContainer>
         {submitting ? (<SubmitMessage>
           <span>Submitting</span>
             <BeatLoader/>
-            </SubmitMessage>): (
+            </SubmitMessage>): ( 
           <>
+          {submitted ? (
+          <>
+          <SubmitMessage >User sucessfully added</SubmitMessage>
+          <SubmitMessage type={'submitted'} onClick={(e)=>{e.preventDefault(); setSubmitted(false); setInputMode(false)}}> {`<< Back to users`}</SubmitMessage>
+          </>
+          ) : (
+            <>
             <UserForm>
             <ProgressBar> 
+
             <FormComponent id={1} selected={formPage} onClick={(e)=>{e.preventDefault(); setFormPage(1)}}>Personal Details</FormComponent>
+
             <FormComponent id={2} selected={formPage}  onClick={(e)=>{e.preventDefault(); setFormPage(2)}}>Address Details</FormComponent>
+
             <FormComponent id={3} selected={formPage}  onClick={(e)=>{e.preventDefault(); setFormPage(3)}}>Company Details</FormComponent>
+
              </ProgressBar>
+
             {formPage===1 && <PersonalDetails/>}
             {formPage===2 && <AddressDetails/>}
             {formPage===3 && <CompanyDetails/>}
         </UserForm>
+            </>
+          )}
+
         </>
         )
 }
         </FormContainer>
 
         </FormVariables.Provider>
-
-    
-    
-
-
-
      
     )
 }
@@ -160,8 +168,18 @@ color: #00c7b6;
 `}
 `
 const SubmitMessage = styled.div`
-margin: 13rem auto;
+margin: auto;
+margin-top: 12rem;
 text-align: center;
 font-size: 1rem;
-//background-color: aqua;
+
+${({type})=> type==='submitted' && css`
+cursor: pointer;
+background-color: lightgrey;
+border: 0.1rem solid grey;
+border-radius: 0.3rem;
+width: 10rem;
+margin-top: 1rem;
+font-style: italic;
+`}
 `

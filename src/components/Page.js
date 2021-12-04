@@ -115,7 +115,7 @@ console.log(currentUser)
   } else {
     return (
       <PageContainer>
-        <DataContext.Provider value={{ query, setQuery, analyticsData, tableData }}>
+        <DataContext.Provider value={{ query, setQuery, setInputMode, analyticsData, tableData }}>
           <NavBar />
           {loading && loggedIn ? (
             <DotLoader css={spinnerCSS} />
