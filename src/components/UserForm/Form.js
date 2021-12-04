@@ -2,6 +2,7 @@ import React, {useState } from 'react';
 import styled from '@emotion/styled';
 import {css} from '@emotion/react'
 import axios from 'axios';
+import { BeatLoader } from 'react-spinners';
 import {DataAnimation} from '../Styles'
 
 import PersonalDetails from './PersonalDetails';
@@ -93,7 +94,10 @@ setSubmitting(false);
  
         <FormVariables.Provider value={{formData, handleFormInput, submitForm, setFormPage}} >
         <FormContainer>
-        {submitting ? (<div>Submitting...</div>): (
+        {submitting ? (<SubmitMessage>
+          <span>Submitting</span>
+            <BeatLoader/>
+            </SubmitMessage>): (
           <>
             <UserForm>
             <ProgressBar> 
@@ -154,4 +158,10 @@ cursor: pointer;
 ${({id, selected})=> id===selected && css`
 color: #00c7b6;
 `}
+`
+const SubmitMessage = styled.div`
+margin: 13rem auto;
+text-align: center;
+font-size: 1rem;
+//background-color: aqua;
 `
