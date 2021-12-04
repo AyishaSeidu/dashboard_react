@@ -68,7 +68,7 @@ export const FormField = styled.fieldset`
 width: 80%;
 margin: 1rem auto;
 animation: ${FadeIn} 1s ease-in forwards;
-border: none;
+border-width: 0.05rem 0 0 0;
 `
 
 export const InputLabel = styled.label`

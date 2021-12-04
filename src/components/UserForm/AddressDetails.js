@@ -6,7 +6,7 @@ function AddressDetails() {
     const {formData, handleFormInput, setFormPage}  = useContext(FormVariables) 
     return (
         <FormField>
-            <FormHead>Address Details</FormHead>
+            
             <InputLabel >Street Name
             <InputBox name = 'street' type='text' onChange={(e)=> {handleFormInput(e, ['address', 'street'], e.target.value)}} defaultValue={formData.address.street} /> 
             </InputLabel>            

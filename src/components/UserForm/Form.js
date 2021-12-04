@@ -1,7 +1,9 @@
-import styled from '@emotion/styled'
 import React, {useState } from 'react';
-import {DataAnimation} from '../Styles'
+import styled from '@emotion/styled';
+import {css} from '@emotion/react'
 import axios from 'axios';
+import {DataAnimation} from '../Styles'
+
 import PersonalDetails from './PersonalDetails';
 import AddressDetails from './AddressDetails';
 import CompanyDetails from './CompanyDetails';
@@ -84,28 +86,38 @@ setSubmitting(false);
 }
 
     return (
-    <>
-    {submitting ? (<div>Submitting...</div>): 
 
-    (
-        <>
+    
+
+    
+ 
         <FormVariables.Provider value={{formData, handleFormInput, submitForm, setFormPage}} >
         <FormContainer>
+        {submitting ? (<div>Submitting...</div>): (
+          <>
             <UserForm>
+            <ProgressBar> 
+            <FormComponent id={1} selected={formPage} onClick={(e)=>{e.preventDefault(); setFormPage(1)}}>Personal Details</FormComponent>
+            <FormComponent id={2} selected={formPage}  onClick={(e)=>{e.preventDefault(); setFormPage(2)}}>Address Details</FormComponent>
+            <FormComponent id={3} selected={formPage}  onClick={(e)=>{e.preventDefault(); setFormPage(3)}}>Company Details</FormComponent>
+             </ProgressBar>
             {formPage===1 && <PersonalDetails/>}
             {formPage===2 && <AddressDetails/>}
             {formPage===3 && <CompanyDetails/>}
         </UserForm>
+        </>
+        )
+}
         </FormContainer>
+
         </FormVariables.Provider>
 
-        </>
-    )
     
-}
+    
 
 
-        </>
+
+     
     )
 }
 
@@ -130,3 +142,16 @@ height: 80%;
 const UserForm = styled.form`
 display: block;
 `;
+
+const ProgressBar = styled.div`
+display: flex;
+flex-direction: row;
+overflow: auto;
+`
+const FormComponent = styled.span`
+margin: 1rem auto;
+cursor: pointer;
+${({id, selected})=> id===selected && css`
+color: #00c7b6;
+`}
+`

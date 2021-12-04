@@ -8,7 +8,6 @@ function PersonalDetails() {
 
     return (
         <FormField>
-            <FormHead>Personal Details</FormHead>
             <InputLabel >Full Name
             <InputBox id= 'fullname' type='text' onChange={(e)=> { handleFormInput(e, ['name'], e.target.value)}} defaultValue={formData.name} /> 
             </InputLabel>            

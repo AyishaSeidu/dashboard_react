@@ -7,7 +7,7 @@ function CompanyDetails() {
     const {formData, handleFormInput, submitForm, setFormPage} = useContext(FormVariables)
     return (
         <FormField>
-            <FormHead>Company Details</FormHead>
+            
             <InputLabel >Company Name
             <InputBox name = 'companyName' type='text' onChange={(e)=> {handleFormInput(e, ['company', 'name'], e.target.value)}} defaultValue={formData.company.name} />
             </InputLabel>            
