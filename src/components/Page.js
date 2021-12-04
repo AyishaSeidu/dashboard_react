@@ -16,6 +16,7 @@ function Page() {
   const appUsers = [
     { username: "admin", password: "admin_test", permissionLevel: "admin" },
     { username: "Ayi", password: "hisham", permissionLevel: "user" },
+    { username: "user1", password: "user", permissionLevel: "user" }
   ];
 
   //user form
@@ -98,6 +99,9 @@ function Page() {
     fecthData(query);
   }, [query,loggedIn]);
 
+console.log(currentUser)
+  //browser output
+
   if (loggedIn === false) {
     return (
       <PageContainer>
@@ -117,7 +121,7 @@ function Page() {
             <DotLoader css={spinnerCSS} />
           ) : (
             <>
-              {inputMode && query==='users' ? (
+              {inputMode && query==='users' && currentUser[0].permissionLevel==='admin' ? (
                 <>
                 <Form/>
                 <AddButton onClick={(e)=> {e.preventDefault(); setInputMode(false)}}>{`<< Back`}</AddButton>
@@ -128,7 +132,7 @@ function Page() {
                   {loggedIn && query === "analytics" && <Analytics />}
                   {loggedIn && query !== "analytics" &&
                   <>
-                  {query==="users" && <AddButton onClick={(e)=> {e.preventDefault(); setInputMode(true)}}>Add User +</AddButton> }
+                  {(query==="users" && currentUser[0].permissionLevel==='admin') && <AddButton onClick={(e)=> {e.preventDefault(); setInputMode(true)}}>Add User +</AddButton> }
                   <DataTable/>
                   </>
                   }

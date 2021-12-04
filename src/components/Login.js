@@ -23,7 +23,8 @@ function Login( {appUsers, setLoggedIn, setCurrentUser}) {
         }
 
         else if (appUsers.some((user)=>user.username===username && user.password===password)) {
-            setCurrentUser({username, password});
+            let currUser = appUsers.filter((user)=> {return user.username=== username & user.password===password})
+            setCurrentUser(currUser);
             setLoggedIn(true)
         }
         else {
