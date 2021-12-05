@@ -51,7 +51,6 @@ to {
 
 export const InputBox = styled.input`
 border: 0.05rem solid lightgray;
-
 height: 2rem;
 border-radius: 0.2rem;
 ::placeholder {

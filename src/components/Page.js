@@ -194,7 +194,5 @@ text-align: center;
 padding: 0.1rem;
 :hover {
   border-color: black;
-  //height: 60%;
-  //font-size: .7rem;
 }
 `;

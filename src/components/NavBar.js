@@ -19,8 +19,6 @@ setQuery(selectedItem);
           
 
 <NavContainer animation={showNavAnimation} open={openMenuBar} onClick={(e)=>e.preventDefault()} >
-    {/* <CloseMenu onClick={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>x</CloseMenu> */}
-
 <NavItem style={{fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > <BarChart2 size={20}/> Analytics</NavItem>
 
             <ContentToggle expand = {expandContent} onClick={(e)=>{e.preventDefault(); setExpandContent(!expandContent)}} >Content</ContentToggle> 
@@ -115,7 +113,6 @@ display: flex;
 flex-direction: row;
 gap: .1rem;
 align-items: center;
-//clear: both;
 align-self: center;
 ${({id, selected})=> id===selected && css`
   color: #00c7b6;
@@ -129,8 +126,6 @@ padding: 1rem 0rem;
 font-size: 1rem;
 margin-left: -3rem;
 display: block;
-//float: left;
-//margin-left: 1.5rem;
 ::after {
     content: ' \\276F';
     display: inline-block;

@@ -70,7 +70,6 @@ const albumsPerUser = getBarChartData(users,albums);
 export default Analytics
 
 const AnalyticsContainer = styled.div`
-//background-color: white;
 margin: auto;
 grid-area: content;
 width: 100%;
@@ -107,7 +106,6 @@ display: grid;
 height: 100%;
 width: 100%;
 overflow: auto;
-//margin: 0.5rem auto;
 background-color: white;
 grid-gap: 1rem;
 grid-template-columns: repeat(3, 1fr);

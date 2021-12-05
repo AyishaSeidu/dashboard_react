@@ -78,7 +78,6 @@ export default Pagination
 
 const Container = styled.span`
 grid-area: pagination;
-//background-color: white;
 font-size: .7rem;
 display: inline;
 width: auto;
