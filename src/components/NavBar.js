@@ -155,12 +155,6 @@ display: none;
 }
 `;
 
-const ToggleBar = styled.div`
-background-color: white;
-margin: 0.1rem;
-height: 0.2rem;
-`;
-
 const SiteHeading = styled.div`
 grid-area: navhead;
 background-color: #00c7b6;
@@ -174,22 +168,6 @@ font-size: 1rem;
 }
 
 `;
-
-const CloseMenu = styled.div`
-display: none;
-
-@media (${({theme})=>theme.mediaquery.smallScreens}) {
-    background-color: whitesmoke;
-    font-size: 1.5rem;
-    position: fixed;
-    display: inline-block;
-    //top: 2.8rem;
-    right: 0rem;
-    color: rgba(250,50,50,0.7);
-}
-`;
-
-
 
 const Options = styled.div`
 visibility: hidden;

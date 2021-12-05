@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import { ChartArea } from '../Styles';

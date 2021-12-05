@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {InputBox, FormField, InputLabel, FormNav, FormHead} from '../Styles';
+import {InputBox, FormField, InputLabel, FormNav} from '../Styles';
 import {FormVariables} from './Form'
 
 function AddressDetails() {

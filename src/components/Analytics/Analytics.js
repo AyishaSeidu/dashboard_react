@@ -47,8 +47,6 @@ const usernames = users.map((user)=> {
 
 const postsPerUser = getBarChartData(users,posts);
 const albumsPerUser = getBarChartData(users,albums);
-console.log(usernames);
-
     return (
         <AnalyticsContainer>
             <CardsContainer>
