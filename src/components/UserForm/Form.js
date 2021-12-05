@@ -68,15 +68,39 @@ const [formData] = useState({
       e.preventDefault();
       setObjectProperty(formData, path, value)
   }
+//checking for empty inputs
+const checkInputFields = (fieldname, actionValue) => {
+ let field =  document.getElementById(fieldname);
+ let inputs = field.getElementsByTagName('input');
+ let allFieldsCompleted=true;
+ 
+ for (let i=0; i<inputs.length; i++) {
+   if (inputs[i].value==='') {
+     inputs[i].style.borderColor='red';
+     allFieldsCompleted=false;
+   }
+ }
+
+ if (allFieldsCompleted && actionValue!=='submit') {
+   setFormPage(actionValue);
+ }
+ else if (allFieldsCompleted && actionValue==='submit') {
+  submitForm('https://jsonplaceholder.typicode.com/users', formData)
+ }
+ else {
+   alert('Please fill all required fields')
+   setFormPage(formPage)
+ }
+
+}
 
 //submitting form
 const submitForm = (url, data) => {
 setSubmitting(true);
-console.log(data)
 try {
 axios.post(url, data)
 .then((res)=> {
-console.log(res);
+  console.log(res.status)
 setSubmitting(false);
 setSubmitted(true)
 })
@@ -91,7 +115,7 @@ setSubmitting(false);
 
     return (
  
-        <FormVariables.Provider value={{formData, handleFormInput, submitForm, setFormPage}} >
+        <FormVariables.Provider value={{formData,checkInputFields, handleFormInput, submitForm, setFormPage}} >
         <FormContainer>
         {submitting ? (<SubmitMessage>
           <span>Submitting</span>
@@ -101,11 +125,11 @@ setSubmitting(false);
           {submitted ? (
           <>
           <SubmitMessage >User sucessfully added</SubmitMessage>
-          <SubmitMessage type={'submitted'} onClick={(e)=>{e.preventDefault(); setSubmitted(false); setInputMode(false)}}> {`<< Back to users`}</SubmitMessage>
+          <SubmitMessage type={'submitted'} onClick={(e)=>{ setSubmitted(false); setInputMode(false)}}> {`<< Back to users`}</SubmitMessage>
           </>
           ) : (
             <>
-            <UserForm>
+            <UserForm onSubmit={(e)=> {e.preventDefault(); checkInputFields('company','submit')}}>
             <ProgressBar> 
 
             <FormComponent id={1} selected={formPage} onClick={(e)=>{e.preventDefault(); setFormPage(1)}}>Personal Details</FormComponent>

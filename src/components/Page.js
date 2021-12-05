@@ -99,7 +99,6 @@ function Page() {
     fecthData(query);
   }, [query,loggedIn]);
 
-console.log(currentUser)
   //browser output
 
   if (loggedIn === false) {

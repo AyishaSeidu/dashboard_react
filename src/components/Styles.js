@@ -81,7 +81,7 @@ padding: 0.5rem;
 }
 `;
 
-export const SubmitButton = styled.button`
+export const SubmitButton = styled.input`
 display: block;
 margin: 2rem auto;
 pad: 1rem;
