@@ -18,7 +18,7 @@ setQuery(selectedItem);
             <SiteHeading > User Engagement Dashboard</SiteHeading>
           
 
-<NavContainer animation={showNavAnimation} open={openMenuBar} onClick={(e)=>e.preventDefault()} >
+<NavContainer animation={showNavAnimation} open={openMenuBar} onClick={(e)=>e.preventDefault()} onBlur={(e)=>{e.preventDefault(); setOpenMenuBar(false)}}>
 <NavItem style={{fontSize: '1rem'}} id ={'analytics'} selected={query} onClick={(e)=>{handleNavSelection(e, 'analytics')}} > <BarChart2 size={20}/> Analytics</NavItem>
 
             <ContentToggle expand = {expandContent} onClick={(e)=>{e.preventDefault(); setExpandContent(!expandContent)}} >Content</ContentToggle> 
@@ -84,6 +84,7 @@ const showNavAnimation = keyframes`
 
 const NavContainer = styled.div`
 cursor: pointer;
+z-index: 1;
 //styling for small screens
 @media (${({theme})=>theme.mediaquery.smallScreens}) {
     position: absolute;
@@ -95,7 +96,6 @@ cursor: pointer;
     background-color: inherit;
     overflow: hidden;
     transition: height 1s ease-in;
-
     //toggling menu bar on small screens
     ${({open})=> open===true && css`
     height: 70vh;
