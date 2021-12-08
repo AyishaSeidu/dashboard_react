@@ -4,7 +4,7 @@ import {FormVariables} from './Form'
 
 function CompanyDetails() {
 
-    const {formData, handleFormInput, setFormPage} = useContext(FormVariables)
+    const {formData, handleFormInput,goToFormPage} = useContext(FormVariables)
     return (
         <FormField id='page3'>
             
@@ -23,7 +23,7 @@ function CompanyDetails() {
             </InputLabel>            
            
 
-            <FormNav onClick={(e)=> {e.preventDefault(); setFormPage(2)}}>Prev</FormNav>
+            <FormNav onClick={(e)=> {e.preventDefault(); goToFormPage(2)}}>Prev</FormNav>
 
             <SubmitButton type='submit' value='Submit'/>
         </FormField>

@@ -3,7 +3,7 @@ import {InputBox, FormField, InputLabel, FormNav} from '../Styles';
 import {FormVariables} from './Form'
 
 function AddressDetails() {
-    const {formData, handleFormInput, checkInputFields, setFormPage}  = useContext(FormVariables) 
+    const {formData, handleFormInput, goToFormPage}  = useContext(FormVariables) 
     return (
         <FormField id='page2'>
             
@@ -37,8 +37,8 @@ function AddressDetails() {
             </InputLabel>            
 
 
-            <FormNav onClick={(e)=> {e.preventDefault(); setFormPage(1)}}>Prev</FormNav>
-            <FormNav direction={'next'}  onClick={(e)=> {e.preventDefault(); checkInputFields('page2', 3)}}>Next</FormNav>
+            <FormNav onClick={(e)=> {e.preventDefault(); goToFormPage(1)}}>Prev</FormNav>
+            <FormNav direction={'next'}  onClick={(e)=> {e.preventDefault(); goToFormPage(3)}}>Next</FormNav>
         </FormField>
     )
 }

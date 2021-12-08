@@ -4,7 +4,7 @@ import {FormVariables} from './Form'
 
 function PersonalDetails() {
 
-    const {formData, checkInputFields, handleFormInput} = useContext(FormVariables);
+    const {formData, goToFormPage, handleFormInput} = useContext(FormVariables);
 
     return (
         <FormField id='page1'>
@@ -33,7 +33,7 @@ function PersonalDetails() {
             </InputLabel>
                         
             
-        <FormNav direction={'next'} onClick={(e)=> {e.preventDefault(); checkInputFields('page1',2)}}>Next</FormNav>
+        <FormNav direction={'next'} onClick={(e)=> {e.preventDefault(); goToFormPage(2)}}>Next</FormNav>
         </FormField>
 
     )

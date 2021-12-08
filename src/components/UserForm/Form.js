@@ -68,40 +68,48 @@ const [formData] = useState({
       e.preventDefault();
       setObjectProperty(formData, path, value)
   }
+
+
 //checking for empty inputs
-const checkInputFields = (fieldname, actionValue) => {
-  if(fieldname==='') {
-    fieldname = `page${formPage}`
-  }
-  if (!isNaN(actionValue) && actionValue<=formPage) { 
+const checkInputFields = (fieldsetID) => {
+  let field =  document.getElementById(fieldsetID);
+  let inputs = field.getElementsByTagName('input');
+  let allFieldsCompleted=true;
+  
+  for (let i=0; i<inputs.length; i++) {
+    if (inputs[i].value==='') {
+      inputs[i].style.borderColor='red';
+      allFieldsCompleted=false;
+    }  
+}
+return allFieldsCompleted;
+}
+
+//handling form navigation
+const goToFormPage = (actionValue) => {
+  let valueIsNumber = !isNaN(actionValue)
+  if (valueIsNumber && actionValue<=formPage) { 
     setFormPage(actionValue)
   }
   else {
-    let field =  document.getElementById(fieldname);
-    let inputs = field.getElementsByTagName('input');
-    let allFieldsCompleted=true;
-    
-    for (let i=0; i<inputs.length; i++) {
-      if (inputs[i].value==='') {
-        inputs[i].style.borderColor='red';
-        allFieldsCompleted=false;
-      }
+    let fieldsetID = `page${formPage}`;
+    let allFieldsCompleted = checkInputFields(fieldsetID);
+
+    if (allFieldsCompleted && valueIsNumber && actionValue>formPage+1) {
+      setFormPage(formPage+1);
+      alert('Please complete the form in order of arragement')
     }
-   
-    if (allFieldsCompleted && actionValue!=='submit') {
+    else if (allFieldsCompleted && valueIsNumber) {
       setFormPage(actionValue);
     }
     else if (allFieldsCompleted && actionValue==='submit') {
-     submitForm('https://jsonplaceholder.typicode.com/users', formData)
-    }
-    else {
+      submitForm('https://jsonplaceholder.typicode.com/users', formData)
+     }
+     else {
       alert('Please fill all required fields')
       setFormPage(formPage)
     }
   }
-
-
-
 }
 
 //submitting form
@@ -125,7 +133,7 @@ setSubmitting(false);
 
     return (
  
-        <FormVariables.Provider value={{formData,checkInputFields, handleFormInput, submitForm, setFormPage}} >
+        <FormVariables.Provider value={{formData, goToFormPage, handleFormInput, submitForm, setFormPage}} >
         <FormContainer>
         {submitting ? (<SubmitMessage>
           <span>Submitting</span>
@@ -139,14 +147,14 @@ setSubmitting(false);
           </>
           ) : (
             <>
-            <UserForm onSubmit={(e)=> {e.preventDefault(); checkInputFields('page3','submit')}}>
+            <UserForm onSubmit={(e)=> {e.preventDefault(); goToFormPage('submit')}}>
             <ProgressBar> 
 
-            <FormComponent id={1} selected={formPage} onClick={(e)=>{e.preventDefault(); checkInputFields('', 1)}}>Personal Details</FormComponent>
+            <FormComponent id={1} selected={formPage} onClick={(e)=>{e.preventDefault(); goToFormPage(1)}}>Personal Details</FormComponent>
 
-            <FormComponent id={2} selected={formPage}  onClick={(e)=>{e.preventDefault(); checkInputFields('', 2)}}>Address Details</FormComponent>
+            <FormComponent id={2} selected={formPage}  onClick={(e)=>{e.preventDefault(); goToFormPage(2)}}>Address Details</FormComponent>
 
-            <FormComponent id={3} selected={formPage}  onClick={(e)=>{e.preventDefault(); checkInputFields('', 3)}}>Company Details</FormComponent>
+            <FormComponent id={3} selected={formPage}  onClick={(e)=>{e.preventDefault(); goToFormPage(3)}}>Company Details</FormComponent>
 
              </ProgressBar>
 
