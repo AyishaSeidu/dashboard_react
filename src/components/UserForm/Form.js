@@ -70,27 +70,37 @@ const [formData] = useState({
   }
 //checking for empty inputs
 const checkInputFields = (fieldname, actionValue) => {
- let field =  document.getElementById(fieldname);
- let inputs = field.getElementsByTagName('input');
- let allFieldsCompleted=true;
- 
- for (let i=0; i<inputs.length; i++) {
-   if (inputs[i].value==='') {
-     inputs[i].style.borderColor='red';
-     allFieldsCompleted=false;
-   }
- }
+  if(fieldname==='') {
+    fieldname = `page${formPage}`
+  }
+  if (!isNaN(actionValue) && actionValue<=formPage) { 
+    setFormPage(actionValue)
+  }
+  else {
+    let field =  document.getElementById(fieldname);
+    let inputs = field.getElementsByTagName('input');
+    let allFieldsCompleted=true;
+    
+    for (let i=0; i<inputs.length; i++) {
+      if (inputs[i].value==='') {
+        inputs[i].style.borderColor='red';
+        allFieldsCompleted=false;
+      }
+    }
+   
+    if (allFieldsCompleted && actionValue!=='submit') {
+      setFormPage(actionValue);
+    }
+    else if (allFieldsCompleted && actionValue==='submit') {
+     submitForm('https://jsonplaceholder.typicode.com/users', formData)
+    }
+    else {
+      alert('Please fill all required fields')
+      setFormPage(formPage)
+    }
+  }
 
- if (allFieldsCompleted && actionValue!=='submit') {
-   setFormPage(actionValue);
- }
- else if (allFieldsCompleted && actionValue==='submit') {
-  submitForm('https://jsonplaceholder.typicode.com/users', formData)
- }
- else {
-   alert('Please fill all required fields')
-   setFormPage(formPage)
- }
+
 
 }
 
@@ -129,14 +139,14 @@ setSubmitting(false);
           </>
           ) : (
             <>
-            <UserForm onSubmit={(e)=> {e.preventDefault(); checkInputFields('company','submit')}}>
+            <UserForm onSubmit={(e)=> {e.preventDefault(); checkInputFields('page3','submit')}}>
             <ProgressBar> 
 
-            <FormComponent id={1} selected={formPage} onClick={(e)=>{e.preventDefault(); setFormPage(1)}}>Personal Details</FormComponent>
+            <FormComponent id={1} selected={formPage} onClick={(e)=>{e.preventDefault(); checkInputFields('', 1)}}>Personal Details</FormComponent>
 
-            <FormComponent id={2} selected={formPage}  onClick={(e)=>{e.preventDefault(); setFormPage(2)}}>Address Details</FormComponent>
+            <FormComponent id={2} selected={formPage}  onClick={(e)=>{e.preventDefault(); checkInputFields('', 2)}}>Address Details</FormComponent>
 
-            <FormComponent id={3} selected={formPage}  onClick={(e)=>{e.preventDefault(); setFormPage(3)}}>Company Details</FormComponent>
+            <FormComponent id={3} selected={formPage}  onClick={(e)=>{e.preventDefault(); checkInputFields('', 3)}}>Company Details</FormComponent>
 
              </ProgressBar>
 

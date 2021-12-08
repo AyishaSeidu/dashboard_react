@@ -7,7 +7,7 @@ function PersonalDetails() {
     const {formData, checkInputFields, handleFormInput} = useContext(FormVariables);
 
     return (
-        <FormField id='personal'>
+        <FormField id='page1'>
             <InputLabel >Full Name *
             <InputBox id= 'fullname' type='text' onChange={(e)=> { handleFormInput(e, ['name'], e.target.value)}} defaultValue={formData.name} /> 
             </InputLabel>            
@@ -33,7 +33,7 @@ function PersonalDetails() {
             </InputLabel>
                         
             
-        <FormNav direction={'next'} onClick={(e)=> {e.preventDefault(); checkInputFields('personal',2)}}>Next</FormNav>
+        <FormNav direction={'next'} onClick={(e)=> {e.preventDefault(); checkInputFields('page1',2)}}>Next</FormNav>
         </FormField>
 
     )

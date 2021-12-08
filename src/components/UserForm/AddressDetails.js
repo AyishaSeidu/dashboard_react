@@ -5,7 +5,7 @@ import {FormVariables} from './Form'
 function AddressDetails() {
     const {formData, handleFormInput, checkInputFields, setFormPage}  = useContext(FormVariables) 
     return (
-        <FormField id='address'>
+        <FormField id='page2'>
             
             <InputLabel >Street Name *
             <InputBox name = 'street' type='text' onChange={(e)=> {handleFormInput(e, ['address', 'street'], e.target.value)}} defaultValue={formData.address.street} /> 
@@ -38,7 +38,7 @@ function AddressDetails() {
 
 
             <FormNav onClick={(e)=> {e.preventDefault(); setFormPage(1)}}>Prev</FormNav>
-            <FormNav direction={'next'}  onClick={(e)=> {e.preventDefault(); checkInputFields('address', 3)}}>Next</FormNav>
+            <FormNav direction={'next'}  onClick={(e)=> {e.preventDefault(); checkInputFields('page2', 3)}}>Next</FormNav>
         </FormField>
     )
 }
